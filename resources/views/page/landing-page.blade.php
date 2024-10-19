@@ -1,0 +1,1 @@
+<a href="{{ route('user.show', Auth::id()) }}">go to profile</a>
