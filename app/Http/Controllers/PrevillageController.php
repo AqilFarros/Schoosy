@@ -43,7 +43,7 @@ class PrevillageController extends Controller
 
         if ($school) {
             if ($previllage) {
-                return redirect()->route('school.show', $school->id)->with('error', 'You already joined this school');
+                return redirect()->route('school.show', $school->slug)->with('error', 'You already joined this school');
             }
 
             Previllage::create([
@@ -53,7 +53,7 @@ class PrevillageController extends Controller
                 'role' => 'student',
             ]);
 
-            return redirect()->route('school.show', $school->id)->with('success', 'You joined this school');
+            return redirect()->route('school.show', $school->slug)->with('success', 'You joined this school');
         } else {
             return back()->with('error', 'School not found');
         }
@@ -94,26 +94,27 @@ class PrevillageController extends Controller
 
     public function getPrevillage() {}
 
-    public function searchPrevillage(string $id, string $query)
+    public function searchPrevillage(string $slug, string $query)
     {
-        $school = School::findOrFail($id);
+        $data = School::where('slug', $slug)->first();
+        $school = School::findOrFail($data->id);
         $previllage = Previllage::where('school_id', $school->id)->where('name', 'LIKE', "%$query%")->get();
 
         return view('page.school.search-member', compact('school', 'previllage'));
     }
 
-    public function updatePrevillage(Request $request, string $id, string $prvId)
+    public function updatePrevillage(Request $request, string $slug, string $prvId)
     {
         $previllage = Previllage::findOrFail($prvId);
         $previllage->update(['role' => $request->role]);
 
-        return redirect()->route('school.show', $id)->with('success', "Success Update Previllage Role");
+        return redirect()->route('school.show', $slug)->with('success', "Success Update Previllage Role");
     }
 
-    public function deletePrevillage(string $id, string $prvId) {
+    public function deletePrevillage(string $slug, string $prvId) {
         $previllage = Previllage::findOrFail($prvId);
         $previllage->delete();
 
-        return redirect()->route('school.show', $id)->with('success', "Success Delete Member From This School");
+        return redirect()->route('school.show', $slug)->with('success', "Success Delete Member From This School");
     }
 }

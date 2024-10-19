@@ -8,6 +8,7 @@ class School extends Model
 {
     protected $fillable = [
         'name',
+        'slug',
         'user_id',
         'image',
         'email',
@@ -17,4 +18,19 @@ class School extends Model
         'code',
         'approve',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function previllage()
+    {
+        return $this->hasMany(Previllage::class);
+    }
+
+    public function classroom()
+    {
+        return $this->hasMany(Classroom::class);
+    }
 }

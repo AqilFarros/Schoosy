@@ -13,4 +13,19 @@ class Previllage extends Model
         'role',
         'classroom_id',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function school()
+    {
+        return $this->belongsTo(School::class);
+    }
+
+    public function classroom()
+    {
+        return $this->hasOne(Classroom::class);
+    }
 }

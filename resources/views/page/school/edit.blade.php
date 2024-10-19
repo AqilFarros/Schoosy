@@ -8,7 +8,7 @@
     </div>
 @endif
 
-<form action="{{ route('school.update', $school->id) }}" method="post">
+<form action="{{ route('school.update', $school->slug) }}" method="post">
     @csrf
     @method('PUT')
 

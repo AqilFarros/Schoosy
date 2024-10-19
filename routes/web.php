@@ -28,9 +28,9 @@ Route::middleware('admin')->prefix('admin')->name('admin.')->group(function() {
 
 Route::prefix('school')->name('school.')->group(function() {
     Route::resource('/', SchoolController::class)->middleware('auth')->only(['store', 'create']);
-    Route::get('/{id}', [SchoolController::class, 'show'])->middleware('previllage')->name('show');
-    Route::get('/edit/{id}', [SchoolController::class, 'edit'])->middleware('operator')->name('edit');
-    Route::put('/{id}', [SchoolController::class, 'update'])->middleware('operator')->name('update');
-    Route::delete('/{id}', [SchoolController::class, 'destroy'])->middleware('owner')->name('destroy');
+    Route::get('/{slug}', [SchoolController::class, 'show'])->middleware('previllage')->name('show');
+    Route::get('/edit/{slug}', [SchoolController::class, 'edit'])->middleware('operator')->name('edit');
+    Route::put('/{slug}', [SchoolController::class, 'update'])->middleware('operator')->name('update');
+    Route::delete('/{slug}', [SchoolController::class, 'destroy'])->middleware('owner')->name('destroy');
     Route::get('/', [SchoolController::class, 'index'])->middleware('admin')->name('index');
 });

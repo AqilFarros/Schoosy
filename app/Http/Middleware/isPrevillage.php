@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\Previllage;
+use App\Models\School;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,9 +18,11 @@ class isPrevillage
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $previlage = Previllage::where('user_id', Auth::id())->where('school_id', $request->route('id'))->first();
+        $school = School::where('slug', $request->route('slug'))->select('id')->first();
+        if (!$school) return redirect()->route('landing-page')->with('error', 'School not found');
+        $previllage = Previllage::where('user_id', Auth::id())->where('school_id', $school->id)->first();
 
-        if ($previlage || (Auth::check() && Auth::user()->role == 'admin')) {
+        if ($previllage || (Auth::check() && Auth::user()->role == 'admin')) {
             return $next($request);
         }
 

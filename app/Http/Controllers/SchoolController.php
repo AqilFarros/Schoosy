@@ -6,6 +6,7 @@ use App\Models\School;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class SchoolController extends Controller
 {
@@ -45,6 +46,7 @@ class SchoolController extends Controller
         $data = $request->all();
         $data['image'] = $image->hashName();
         $data['user_id'] = Auth::user()->id;
+        $data['slug'] = Str::slug($request->name);
 
         School::create($data);
 
@@ -54,9 +56,10 @@ class SchoolController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $slug)
     {
-        $school = School::findOrFail($id);
+        $data = School::where('slug', $slug)->first();
+        $school = School::findOrFail($data->id);
 
         return view('page.school.index', compact('school'));
     }
@@ -64,9 +67,10 @@ class SchoolController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $slug)
     {
-        $school = School::findOrFail($id);
+        $data = School::where('slug', $slug)->first();
+        $school = School::findOrFail($data->id);
 
         return view('page.school.edit', compact('school'));
     }
@@ -74,9 +78,10 @@ class SchoolController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $slug)
     {
-        $school = School::findOrFail($id);
+        $data = School::where('slug', $slug)->first();
+        $school = School::findOrFail($data->id);
 
         if ($request->hasFile('image')) {
             $request->validate([
@@ -97,18 +102,23 @@ class SchoolController extends Controller
                 'phone' => 'required',
             ]);
 
-            $school->update($request->all());
+            $newData = $request->all();
+
+            $newData['slug'] = Str::slug($request->name);
+
+            $school->update($newData);
         }
 
-        return redirect()->route('school.show', $id);
+        return redirect()->route('school.show', $slug);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $slug)
     {
-        $school = School::findOrFail($id);
+        $data = School::where('slug', $slug)->first();
+        $school = School::findOrFail($data->id);
 
         Storage::disk('public')->delete('school/' . basename($school->image));
         $school->delete();
