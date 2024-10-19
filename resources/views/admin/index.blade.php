@@ -1,3 +1,13 @@
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 @foreach ($school as $item)
     <div>
         <img src="{{ url('storage/school', $item->image) }}" alt="" width="300">
@@ -13,6 +23,7 @@
             @csrf
             @method('POST')
             <input type="text" value="approve" name="status" hidden>
+            <input type="text" value="{{ old('code') }}" name="code">
             <button type="submit">
                 approve
             </button>

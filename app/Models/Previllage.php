@@ -9,6 +9,7 @@ class Previllage extends Model
     protected $fillable = [
         'user_id',
         'school_id',
+        'name',
         'role',
         'classroom_id',
     ];

@@ -17,9 +17,7 @@ class isOperator
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $previllage = Previllage::where('user_id', Auth::id())->where('school_id', $request->query('id'))->first();
-
-        dd($request);
+        $previllage = Previllage::where('user_id', Auth::id())->where('school_id', $request->route('id'))->first();
 
         if (Auth::check() && ($previllage->role == 'owner' || $previllage->role == 'operator' || Auth::user()->role == 'admin')) {
             return $next($request);

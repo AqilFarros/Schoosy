@@ -17,9 +17,9 @@ class isPrevillage
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $previlage = Previllage::where('user_id', Auth::id())->where('school_id', $request->query('id'))->first();
+        $previlage = Previllage::where('user_id', Auth::id())->where('school_id', $request->route('id'))->first();
 
-        if ($previlage || Auth::user()->role == 'admin') {
+        if ($previlage || (Auth::check() && Auth::user()->role == 'admin')) {
             return $next($request);
         }
 

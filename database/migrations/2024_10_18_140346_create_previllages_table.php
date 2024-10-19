@@ -18,6 +18,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class)->references("id")->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignIdFor(School::class)->references('id')->on('schools')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('name');
             $table->string('role');
             $table->foreignIdFor(Classroom::class)->nullable()->references('id')->on('classrooms')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
