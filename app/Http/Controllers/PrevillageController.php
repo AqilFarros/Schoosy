@@ -10,18 +10,18 @@ use Illuminate\Support\Facades\Storage;
 
 class PrevillageController extends Controller
 {
-    public function searchSchool(string $code)
+    public function previewSchool(string $code)
     {
         $school = School::where('code', $code)->first();
 
         if ($school) {
-            return view('');
+            return view('page.school.search-school');
         } else {
             return back()->with('error', 'School not found');
         }
     }
 
-    public function searchhSchool(Request $request)
+    public function searchSchool(Request $request)
     {
         $request->validate([
             'code' => 'required'
@@ -30,7 +30,7 @@ class PrevillageController extends Controller
         $school = School::where('code', $request->code)->first();
 
         if ($school) {
-            return redirect()->route('school.index');
+            return redirect()->route('school.previewSchool', $school->code);
         } else {
             return back()->with('error', 'School not found');
         }
@@ -98,9 +98,9 @@ class PrevillageController extends Controller
     {
         $data = School::where('slug', $slug)->first();
         $school = School::findOrFail($data->id);
-        $previllage = Previllage::where('school_id', $school->id)->where('name', 'LIKE', "%$query%")->get();
+        $previlage = Previllage::where('school_id', $school->id)->where('name', 'LIKE', "%$query%")->get();
 
-        return view('page.school.search-member', compact('school', 'previllage'));
+        return view('page.school.search-member', compact('school', 'previlage'));
     }
 
     public function updatePrevillage(Request $request, string $slug, string $prvId)

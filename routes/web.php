@@ -35,7 +35,8 @@ Route::prefix('school')->name('school.')->group(function() {
     Route::put('/{slug}', [SchoolController::class, 'update'])->middleware('operator')->name('update');
     Route::delete('/{slug}', [SchoolController::class, 'destroy'])->middleware('owner')->name('destroy');
     Route::get('/', [SchoolController::class, 'index'])->middleware('admin')->name('index');
-    Route::get('/{code}', [PrevillageController::class, 'searchSchool'])->middleware('auth')->name('searchSchool');
+    Route::post('/search', [PrevillageController::class, 'searchSchool'])->middleware('auth')->name('searchSchool');
+    Route::get('/{code}', [PrevillageController::class, 'previewSchool'])->middleware('auth')->name('previewSchool');
     Route::post('/{code}', [PrevillageController::class, 'joinSchool'])->middleware('auth')->name('joinSchool');
     Route::delete('/{code}', [PrevillageController::class, 'leaveSchool'])->middleware('auth')->name('leaveSchool');
 });

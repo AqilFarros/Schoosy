@@ -1,3 +1,6 @@
+@include('layouts.session.error')
+@include('layouts.session.success')
+
 @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
@@ -14,27 +17,27 @@
 
     <div>
         <label for="">Name</label>
-        <input type="text" name="name" value="{{ old('name') }}">
+        <input type="text" name="name" value="{{ $school->name }}">
     </div>
 
     <div>
         <label for="">Email</label>
-        <input type="text" name="email" value="{{ old('email') }}">
+        <input type="text" name="email" value="{{ $school->email }}">
     </div>
 
     <div>
         <label for="">phone</label>
-        <input type="text" name="phone" value="{{ old('phone') }}">
+        <input type="text" name="phone" value="{{ $school->phone }}">
     </div>
 
     <div>
         <label for="">website</label>
-        <input type="text" name="website" value="{{ old('website') }}">
+        <input type="text" name="website" value="{{ $school->website }}">
     </div>
 
     <div>
         <label for="">address</label>
-        <input type="text" name="address" value="{{ old('address') }}">
+        <input type="text" name="address" value="{{ $school->address }}">
     </div>
 
     <button type="submit">submit</button>

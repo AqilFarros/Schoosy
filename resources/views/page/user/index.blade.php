@@ -1,3 +1,6 @@
+@include('layouts.session.error')
+@include('layouts.session.success')
+
 <div class="relative">
     @if (empty(Auth::user()->image))
         <img src="https://ui-avatars.com/api/?background=random&name={{ $user->name }}" alt="img"
@@ -15,6 +18,15 @@
             <input type="file" name="image" id="userImage" onchange="uploadImage()" hidden>
         </form>
     </div>
+</div>
+
+<div>
+    <form action="{{ route('school.searchSchool') }}" method="post">
+        @csrf
+        @method('POST')
+        <input type="text" name="code">
+        <button type="submit">search</button>
+    </form>
 </div>
 
 <script>

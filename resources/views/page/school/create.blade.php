@@ -1,3 +1,6 @@
+@include('layouts.session.error')
+@include('layouts.session.success')
+
 @if ($errors->any())
     <div class="alert alert-danger">
         <ul>

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Classroom;
+use App\Models\Previllage;
 use App\Models\School;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -14,8 +16,9 @@ class ClassroomController extends Controller
     {
         $school = School::where('slug', $slug)->first();
         $classroom = Classroom::where('school_id', $school->id)->get();
+        $previlage = Previllage::where('school_id', $school->id)->where('user_id', Auth::id())->first();
 
-        return view('page.school.classroom.index', compact('classroom'));
+        return view('page.school.classroom.index', compact('classroom', 'school', 'previlage'));
     }
 
     public function show(string $slug, string $slugClassroom)
@@ -52,7 +55,7 @@ class ClassroomController extends Controller
 
         Classroom::create($data);
 
-        return redirect()->route('');
+        return redirect()->route('previlage.classroom.index', $slug)->with('success', 'Success Create Classroom');
     }
 
     public function edit(string $slug, string $slugClassroom)
@@ -102,7 +105,7 @@ class ClassroomController extends Controller
         Storage::disk('public')->delete('classroom/' . basename($classroom->image));
         $classroom->delete();
 
-        return redirect()->route('previlage.classroom.index', $slug)->with('success', 'Success Update Classroom');
+        return redirect()->route('previlage.classroom.index', $slug)->with('success', 'Success Delete Classroom');
     }
 
     public function addMember() {}
