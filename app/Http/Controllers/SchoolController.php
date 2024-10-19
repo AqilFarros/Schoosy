@@ -34,7 +34,7 @@ class SchoolController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            "name" => 'required',
+            "name" => 'required|unique:schools',
             "email" => 'required|email',
             "address" => 'required',
             'phone' => 'required',
@@ -96,7 +96,7 @@ class SchoolController extends Controller
         }
         else {
             $request->validate([
-                "name" => 'required',
+                "name" => 'required|unique:schools',
                 "email" => 'required|email',
                 "address" => 'required',
                 'phone' => 'required',

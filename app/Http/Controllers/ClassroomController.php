@@ -10,27 +10,31 @@ use Illuminate\Support\Str;
 
 class ClassroomController extends Controller
 {
-    public function index(string $slug) {
+    public function index(string $slug)
+    {
         $school = School::where('slug', $slug)->first();
         $classroom = Classroom::where('school_id', $school->id)->get();
 
         return view('page.school.classroom.index', compact('classroom'));
     }
 
-    public function show(string $slug, string $slugClassroom) {
+    public function show(string $slug, string $slugClassroom)
+    {
         $school = School::where('slug', $slug)->first();
         $classroom = Classroom::where('slug', $slugClassroom)->first();
 
         return view('page.school.classroom.show', compact('school', 'classroom'));
     }
 
-    public function create(string $slug) {
+    public function create(string $slug)
+    {
         $school = School::where('slug', $slug)->first();
 
         return view('page.school.classroom.create', compact('school'));
     }
 
-    public function store(Request $request, string $slug) {
+    public function store(Request $request, string $slug)
+    {
         $school = School::where('slug', $slug)->select('id')->first();
 
         $request->validate([
@@ -48,18 +52,60 @@ class ClassroomController extends Controller
 
         Classroom::create($data);
 
-        return redirect()->route('school.index');
+        return redirect()->route('');
     }
 
-    public function edit() {}
+    public function edit(string $slug, string $slugClassroom)
+    {
+        $school = School::where('slug', $slug)->first();
+        $classroom = Classroom::where('slug', $slugClassroom)->first();
 
-    public function update() {}
-
-    public function destroy() {}
-
-    public function addMember() {
-        
+        return view('page.school.classroom.edit', compact(
+            'classroom',
+            'school',
+        ));
     }
+
+    public function update(Request $request, string $slug, string $slugClassroom) {
+        $classroom = Classroom::where('slug', $slugClassroom)->first();
+
+        if ($request->hasFile('image')) {
+            $request->validate([
+                'image' => 'required|mimes:png,jpg|max:2048|image',
+            ]);
+
+            $image = $request->file('image');
+
+            Storage::disk('public')->delete('classroom/' . basename($classroom->image));
+            Storage::disk('public')->putFileAs('classroom', $image, $image->hashName());
+
+            $classroom->update([
+                'image' => $image->hashName(),
+            ]);
+        } else {
+            $request->validate([
+                'name' => 'required',
+            ]);
+
+            $classroom->update([
+                'name' => $request->name,
+                'slug' => Str::slug($request->name),
+            ]);
+        }
+
+        return redirect()->route('previlage.classroom.show', [$slug, $slugClassroom])->with('success', 'Success Update Classroom');
+    }
+
+    public function destroy(string $slug, string $slugClassroom) {
+        $classroom = Classroom::where('slug', $slugClassroom)->first();
+
+        Storage::disk('public')->delete('classroom/' . basename($classroom->image));
+        $classroom->delete();
+
+        return redirect()->route('previlage.classroom.index', $slug)->with('success', 'Success Update Classroom');
+    }
+
+    public function addMember() {}
 
     public function deleteMember() {}
 }

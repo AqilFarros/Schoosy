@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\ClassroomController;
+use App\Http\Controllers\PrevillageController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -33,4 +35,23 @@ Route::prefix('school')->name('school.')->group(function() {
     Route::put('/{slug}', [SchoolController::class, 'update'])->middleware('operator')->name('update');
     Route::delete('/{slug}', [SchoolController::class, 'destroy'])->middleware('owner')->name('destroy');
     Route::get('/', [SchoolController::class, 'index'])->middleware('admin')->name('index');
+    Route::get('/{code}', [PrevillageController::class, 'searchSchool'])->middleware('auth')->name('searchSchool');
+    Route::post('/{code}', [PrevillageController::class, 'joinSchool'])->middleware('auth')->name('joinSchool');
+    Route::delete('/{code}', [PrevillageController::class, 'leaveSchool'])->middleware('auth')->name('leaveSchool');
+});
+
+Route::prefix('{slug}')->name('previlage.')->group(function() {
+    Route::get('/search/{query}', [PrevillageController::class, 'searchPrevillage'])->middleware('previllage')->name('searchPrevillage');
+    Route::post('/update/{prvId}', [PrevillageController::class, 'updatePrevillage'])->middleware('operator')->name('updatePrevillage');
+    Route::delete('/delete/{prvId}', [PrevillageController::class, 'deletePrevillage'])->middleware('operator')->name('deletePrevillage');
+
+    Route::get('/classroom', [ClassroomController::class, 'index'])->middleware('previllage')->name('classroom.index');
+    Route::get('/{slugClassroom}', [ClassroomController::class, 'show'])->middleware('previllage')->name('classroom.show');
+    Route::get('/classroom/create', [ClassroomController::class, 'create'])->middleware('operator')->name('classroom.create');
+    Route::post('/classroom/store', [ClassroomController::class, 'store'])->middleware('operator')->name('classroom.store');
+    Route::get('/{slugClassroom}/edit', [ClassroomController::class, 'edit'])->middleware('operator')->name('classroom.edit');
+    Route::put('/{slugClassroom}/update', [ClassroomController::class, 'update'])->middleware('operator')->name('classroom.update');
+    Route::delete('/{slugClassroom}/destroy', [ClassroomController::class, 'destroy'])->middleware('operator')->name('classroom.destroy');
+
+    
 });

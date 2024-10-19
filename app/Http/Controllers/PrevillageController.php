@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 
 class PrevillageController extends Controller
 {
-    public function previewSchool(string $code)
+    public function searchSchool(string $code)
     {
         $school = School::where('code', $code)->first();
 
@@ -21,7 +21,7 @@ class PrevillageController extends Controller
         }
     }
 
-    public function searchSchool(Request $request)
+    public function searchhSchool(Request $request)
     {
         $request->validate([
             'code' => 'required'
