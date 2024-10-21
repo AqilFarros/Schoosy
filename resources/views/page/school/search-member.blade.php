@@ -6,17 +6,21 @@
         <div>
             <p>{{ $item->user->name }}</p>
             <p>{{ $item->role }}</p>
-            <form action="{{ route('previlage.updatePrevillage', [$school->slug, $item->id]) }}" method="post">
-                @csrf
-                @method('PUT')
-                <select name="role" id="">
-                    <option value="student">student</option>
-                    <option value="teacher">teacher</option>
-                    <option value="operator">operator</option>
-                </select>
+            @if ($item->role == 'owner')
+            <option value="">owner</option>
+            @else
+                <form action="{{ route('previlage.updatePrevillage', [$school->slug, $item->id]) }}" method="post">
+                    @csrf
+                    @method('PUT')
+                    <select name="role" id="">
+                        <option value="student">student</option>
+                        <option value="teacher">teacher</option>
+                        <option value="operator">operator</option>
+                    </select>
 
-                <button type="submit">update</button>
-            </form>
+                    <button type="submit">update</button>
+                </form>
+            @endif
 
             <form action="{{ route('previlage.deletePrevillage', [$school->slug, $item->id]) }}" method="post">
                 @csrf

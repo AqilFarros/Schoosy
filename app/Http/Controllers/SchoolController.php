@@ -35,6 +35,7 @@ class SchoolController extends Controller
     {
         $request->validate([
             "name" => 'required|unique:schools',
+            'description' => 'required',
             "email" => 'required|email',
             "address" => 'required',
             'phone' => 'required',
@@ -97,6 +98,7 @@ class SchoolController extends Controller
         else {
             $request->validate([
                 "name" => 'required|unique:schools',
+                "description" => "required",
                 "email" => 'required|email',
                 "address" => 'required',
                 'phone' => 'required',

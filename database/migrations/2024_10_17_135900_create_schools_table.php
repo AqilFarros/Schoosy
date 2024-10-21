@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignIdFor(User::class)->references("id")->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->string('name')->unique();
             $table->string('slug');
+            $table->string('description');
             $table->string('image');
             $table->string('email');
             $table->string('address');

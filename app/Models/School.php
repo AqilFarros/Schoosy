@@ -9,6 +9,7 @@ class School extends Model
     protected $fillable = [
         'name',
         'slug',
+        'description',
         'user_id',
         'image',
         'email',
@@ -32,5 +33,10 @@ class School extends Model
     public function classroom()
     {
         return $this->hasMany(Classroom::class);
+    }
+
+    public function book()
+    {
+        return $this->hasMany(Book::class);
     }
 }

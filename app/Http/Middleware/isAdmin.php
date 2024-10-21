@@ -20,6 +20,6 @@ class isAdmin
             return $next($request);
         }
 
-        return redirect()->route('landing-page');
+        return redirect()->route('user.show', Auth::id());
     }
 }

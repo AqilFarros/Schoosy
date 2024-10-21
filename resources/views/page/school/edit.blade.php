@@ -1,6 +1,3 @@
-@include('layouts.session.error')
-@include('layouts.session.success')
-
 @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
@@ -18,6 +15,11 @@
     <div>
         <label for="">Name</label>
         <input type="text" name="name" value="{{ $school->name }}">
+    </div>
+
+    <div>
+        <label for="">Description</label>
+        <input type="text" name="description" value="{{ $school->description }}">
     </div>
 
     <div>

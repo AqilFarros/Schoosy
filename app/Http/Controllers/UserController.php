@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Previllage;
+use App\Models\School;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -13,7 +16,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('page.user.index');
+        $previlage = Previllage::where('user_id', Auth::id());
+
+        return view('page.user.index', compact('previlage'));
     }
 
     /**
@@ -38,8 +43,9 @@ class UserController extends Controller
     public function show(string $id)
     {
         $user = User::findOrFail($id);
+        $previlage = Previllage::where('user_id', Auth::id())->get();
 
-        return view('page.user.index', compact('user'));
+        return view('page.user.index', compact('user', 'previlage'));
     }
 
     /**
