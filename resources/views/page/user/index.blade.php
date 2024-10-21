@@ -34,20 +34,27 @@
                             {{ Auth::user()->created_at->format('Y') }}
                         </p>
                     </div>
+                    <div class="flex gap-3 mt-4">
+                        <a href="{{ route('school.create') }}" class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-4 py-2 transition-all">Create School</a>
+                        <a href="{{ route('user.edit', Auth::id()) }}" class="text-white bg-yellow-400 hover:bg-yellow-500 font-medium rounded-lg text-sm px-4 py-2 transition-all">Edit Profile</a>
+                        <form action="#" method="post">
+                            <button type="submit" class="text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-4 py-2 transition-all">Delete Accout</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
 
-    <form class="my-5 mx-5">
+    <form class="my-5 mx-5" method="GET" action="{{ route('school.searchSchool') }}">
         <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
         <div class="relative">
             <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </div>
             <input type="search" id="default-search" class="block w-full p-4 ps-10 text-sm border rounded-lg "
-                placeholder="Search School" required />
+                placeholder="Enter School Code To Join School" name="code" required />
             <button type="submit"
                 class="text-white absolute end-2.5 bottom-2.5 bg-green-700 hover:bg-green-800  font-medium rounded-lg text-sm px-4 py-2">Search</button>
         </div>
@@ -56,7 +63,7 @@
 
     <div class="mx-5 gap-4 sm:grid sm:grid-cols-1 md:mx-5 lg:mx-40 md:grid-cols-1 lg:grid-cols-2">
 
-        <div class="bg-white border border-gray-200 rounded-lg shadow max-w-xl mx-auto hover:bg-gray-100">
+        <div class="bg-white border border-gray-200 rounded-lg shadow max-w-xl mx-auto hover:bg-gray-100 duration-300">
 
             <div class="flex flex-col md:flex-row items-center">
                 <img class="object-cover w-full rounded-t-lg h-32 md:h-auto md:w-32 md:rounded-none md:rounded-l-lg"
