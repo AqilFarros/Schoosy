@@ -39,4 +39,14 @@ class School extends Model
     {
         return $this->hasMany(Book::class);
     }
+
+    public function absentClass()
+    {
+        return $this->hasMany(AbsentClass::class);
+    }
+
+    public function absentEmployee()
+    {
+        return $this->hasMany(AbsentEmployee::class);
+    }
 }

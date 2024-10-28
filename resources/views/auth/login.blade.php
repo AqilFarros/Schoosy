@@ -79,7 +79,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    @vite('resources/css/app.css')
+    {{-- @vite('resources/css/app.css') --}}
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'main-color': "#159947",
+                        'secondary-color': "#272727",
+                        'grey-color': '#B5B5B5'
+                    }
+                },
+                fontFamily: {
+                    TitanOne: ['Titan One', 'sans-serif'],
+                    Nunito: ['Nunito', 'sans-serif']
+                },
+                screens: {
+                    sm: "340px",
+                    md: "440px",
+                    lg: "768px",
+                    xl: "1180px",
+                },
+                container: {
+                    center: true,
+                    padding: {
+                        DEFAULT: "12",
+                        md: "32px"
+                    }
+                },
+            },
+        }
+    </script>
 
     <!---------- Favicon ---------->
     <link rel="shortcut icon" href="{{ asset('assets/Logo.png') }}" type="image/x-icon">
@@ -131,7 +162,8 @@
 
                     <div class="mt-3 text-xs flex justify-between items-center text-[#002D74]">
                         <p>Don't have an account?</p>
-                        <a href="{{ route('register') }}" class="py-2 px-5 bg-white border rounded-xl hover:scale-110 duration-300">Sign
+                        <a href="{{ route('register') }}"
+                            class="py-2 px-5 bg-white border rounded-xl hover:scale-110 duration-300">Sign
                             Up</a>
                     </div>
                 </div>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\PrevillageController;
 use App\Http\Controllers\SchoolController;
@@ -53,4 +54,6 @@ Route::prefix('{slug}')->name('previlage.')->group(function () {
     Route::get('/{slugClassroom}/edit', [ClassroomController::class, 'edit'])->middleware('operator')->name('classroom.edit');
     Route::put('/{slugClassroom}/update', [ClassroomController::class, 'update'])->middleware('operator')->name('classroom.update');
     Route::delete('/{slugClassroom}/destroy', [ClassroomController::class, 'destroy'])->middleware('operator')->name('classroom.destroy');
+
+    Route::get('/book', [BookController::class, 'index'])->middleware('previllage')->name('book.index');
 });

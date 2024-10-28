@@ -1,4 +1,4 @@
-<header>
+<header class="bg-slate-100 shadow">
     <nav>
         <div class="flex justify-between items-end md:items-center w-[92%] mx-auto py-3">
             <div class="flex space-x-11">
@@ -16,7 +16,7 @@
 
                 <div class="items-center hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
                     <ul
-                        class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white ">
+                        class="flex flex-col font-medium p-4 md:p-0 mt-4 border md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
                         <li>
                             <a href="#" class="hover:text-main-color duration-300" aria-current="page">Home</a>
                         </li>
@@ -42,7 +42,7 @@
                 <button type="button" class="flex text-sm rounded-full md:me-0 " id="user-menu-button"
                     aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
                     <img class="w-8 h-8 rounded-full"
-                        src="https://i.pinimg.com/enabled_lo/564x/7c/49/a0/7c49a0766f9c0c320d144afd38bbaa75.jpg"
+                        src="{{ url('storage/profile/', Auth::user()->image) }}"
                         alt="user photo">
                 </button>
 

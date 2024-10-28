@@ -7,19 +7,21 @@
                 <div class="relative inline-block">
                     @if (empty(Auth::user()->image))
                         <img class="w-32 h-32 rounded-full"
-                            src="https://ui-avatars.com/api/?background=random&name={{ $user->name }}" alt="Profile Image">
+                            src="https://ui-avatars.com/api/?background=random&name={{ Auth::user()->name }}"
+                            alt="Profile Image">
                     @else
                         <img class="w-32 h-32 rounded-full object-center object-cover"
-                            src="{{ url('storage/profile/', $user->image) }}" alt="Profile Image">
+                            src="{{ url('storage/profile/', Auth::user()->image) }}" alt="Profile Image">
                     @endif
-                    <form action="{{ route('user.update', $user->id) }}" method="post" id="uploadForm"
+                    <form action="{{ route('user.update', Auth::id()) }}" method="post" id="uploadForm"
                         enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <label for="image"
                             class="absolute bottom-1 ml-24 lg:bottom-2 lg:right-2 text-white bg-secondary-color p-1 rounded-full w-8 h-8">
                             <div class="relative w-full h-full">
-                                <i class="fa-solid fa-pencil absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></i>
+                                <i
+                                    class="fa-solid fa-pencil absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></i>
                             </div>
                         </label>
                         <input type="file" name="image" id="image" hidden onchange="uploadImage()" />
@@ -35,10 +37,16 @@
                         </p>
                     </div>
                     <div class="flex gap-3 mt-4">
-                        <a href="{{ route('school.create') }}" class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-4 py-2 transition-all">Create School</a>
-                        <a href="{{ route('user.edit', Auth::id()) }}" class="text-white bg-yellow-400 hover:bg-yellow-500 font-medium rounded-lg text-sm px-4 py-2 transition-all">Edit Profile</a>
+                        <a href="{{ route('school.create') }}"
+                            class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-4 py-2 transition-all">Create
+                            School</a>
+                        <a href="{{ route('user.edit', Auth::id()) }}"
+                            class="text-white bg-yellow-400 hover:bg-yellow-500 font-medium rounded-lg text-sm px-4 py-2 transition-all">Edit
+                            Profile</a>
                         <form action="#" method="post">
-                            <button type="submit" class="text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-4 py-2 transition-all">Delete Accout</button>
+                            <button type="submit"
+                                class="text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-4 py-2 transition-all">Delete
+                                Accout</button>
                         </form>
                     </div>
                 </div>
@@ -63,90 +71,33 @@
 
     <div class="mx-5 gap-4 sm:grid sm:grid-cols-1 md:mx-5 lg:mx-40 md:grid-cols-1 lg:grid-cols-2">
 
-        <div class="bg-white border border-gray-200 rounded-lg shadow max-w-xl mx-auto hover:bg-gray-100 duration-300">
-
-            <div class="flex flex-col md:flex-row items-center">
-                <img class="object-cover w-full rounded-t-lg h-32 md:h-auto md:w-32 md:rounded-none md:rounded-l-lg"
-                    src="https://i.pinimg.com/enabled_lo/236x/ae/ff/ad/aeffad664fd627431dfd04804be239ab.jpg"
-                    alt="IDN BP SENTUL">
-                <div class="flex flex-col p-6 lg:p-0 md:p-0 leading-normal w-full">
-                    <h5 class="mb-2 text-2xl">IDN BP SENTUL</h5>
-                    <p class="mb-2"><i class="fa-regular fa-envelope"></i> IDN@GMAIL.COM</p>
-                    <div class="flex gap-1">
-                        <p class=""><i class="fa-regular fa-clock"></i> Bergabung sejak 2022</p>
-                        <p class=""><i class="fa-solid fa-people-group"></i> Siswa terdaftar <span>2000</span></p>
+        @forelse ($previlage as $item)
+        <a href="{{ route('school.show', $item->school->slug) }}">
+            <div class="bg-white border border-gray-200 rounded-lg shadow max-w-xl mx-auto hover:bg-gray-100 duration-300">
+                <div class="flex flex-col md:flex-row items-center">
+                    <img class="object-cover w-full rounded-t-lg h-32 md:h-auto md:w-32 md:rounded-none md:rounded-l-lg"
+                        src="https://i.pinimg.com/enabled_lo/236x/ae/ff/ad/aeffad664fd627431dfd04804be239ab.jpg"
+                        alt="{{ $item->school->name }}">
+                    <div class="flex flex-col p-6 lg:p-0 md:p-0 leading-normal w-full">
+                        <h5 class="mb-2 text-2xl">{{ $item->school->name }}</h5>
+                        <p class="mb-2"><i class="fa-regular fa-envelope"></i> {{ $item->school->email }}</p>
+                        <div class="flex gap-1">
+                            <p class=""><i class="fa-regular fa-clock"></i> Bergabung sejak
+                                {{ $item->school->created_at->format('Y') }}</p>
+                            <p class=""><i class="fa-solid fa-people-group"></i> Jumlah anggota
+                                <span>{{ $item->school->previllage->count() }}</span>
+                            </p>
+                        </div>
                     </div>
                 </div>
+                <p class="mx-5 my-4 text-gray-700">
+                    {{ $item->school->description }}
+                </p>
             </div>
-
-            <p class="mx-5 my-4 text-gray-700">
-                Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.
-            </p>
-
-        </div>
-        <div class="bg-white border border-gray-200 rounded-lg shadow max-w-xl mx-auto hover:bg-gray-100">
-
-            <div class="flex flex-col md:flex-row items-center">
-                <img class="object-cover w-full rounded-t-lg h-32 md:h-auto md:w-32 md:rounded-none md:rounded-l-lg"
-                    src="https://i.pinimg.com/enabled_lo/236x/ae/ff/ad/aeffad664fd627431dfd04804be239ab.jpg"
-                    alt="IDN BP SENTUL">
-                <div class="flex flex-col p-6 lg:p-0 md:p-0 leading-normal w-full">
-                    <h5 class="mb-2 text-2xl">IDN BP SENTUL</h5>
-                    <p class="mb-2"><i class="fa-regular fa-envelope"></i> IDN@GMAIL.COM</p>
-                    <div class="flex gap-1">
-                        <p class=""><i class="fa-regular fa-clock"></i> Bergabung sejak 2022</p>
-                        <p class=""><i class="fa-solid fa-people-group"></i> Siswa terdaftar <span>2000</span></p>
-                    </div>
-                </div>
-            </div>
-
-            <p class="mx-5 my-4 text-gray-700">
-                Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.
-            </p>
-
-        </div>
-        <div class="bg-white border border-gray-200 rounded-lg shadow max-w-xl mx-auto hover:bg-gray-100">
-
-            <div class="flex flex-col md:flex-row items-center">
-                <img class="object-cover w-full rounded-t-lg h-32 md:h-auto md:w-32 md:rounded-none md:rounded-l-lg"
-                    src="https://i.pinimg.com/enabled_lo/236x/ae/ff/ad/aeffad664fd627431dfd04804be239ab.jpg"
-                    alt="IDN BP SENTUL">
-                <div class="flex flex-col p-6 lg:p-0 md:p-0 leading-normal w-full">
-                    <h5 class="mb-2 text-2xl">IDN BP SENTUL</h5>
-                    <p class="mb-2"><i class="fa-regular fa-envelope"></i> IDN@GMAIL.COM</p>
-                    <div class="flex gap-1">
-                        <p class=""><i class="fa-regular fa-clock"></i> Bergabung sejak 2022</p>
-                        <p class=""><i class="fa-solid fa-people-group"></i> Siswa terdaftar <span>2000</span></p>
-                    </div>
-                </div>
-            </div>
-
-            <p class="mx-5 my-4 text-gray-700">
-                Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.
-            </p>
-
-        </div>
-        <div class="bg-white border border-gray-200 rounded-lg shadow max-w-xl mx-auto hover:bg-gray-100">
-
-            <div class="flex flex-col md:flex-row items-center">
-                <img class="object-cover w-full rounded-t-lg h-32 md:h-auto md:w-32 md:rounded-none md:rounded-l-lg"
-                    src="https://i.pinimg.com/enabled_lo/236x/ae/ff/ad/aeffad664fd627431dfd04804be239ab.jpg"
-                    alt="IDN BP SENTUL">
-                <div class="flex flex-col p-6 lg:p-0 md:p-0 leading-normal w-full">
-                    <h5 class="mb-2 text-2xl">IDN BP SENTUL</h5>
-                    <p class="mb-2"><i class="fa-regular fa-envelope"></i> IDN@GMAIL.COM</p>
-                    <div class="flex gap-1">
-                        <p class=""><i class="fa-regular fa-clock"></i> Bergabung sejak 2022</p>
-                        <p class=""><i class="fa-solid fa-people-group"></i> Siswa terdaftar <span>2000</span></p>
-                    </div>
-                </div>
-            </div>
-
-            <p class="mx-5 my-4 text-gray-700">
-                Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.
-            </p>
-
-        </div>
+        </a>
+        @empty
+            <h1>You haven't join any school yet</h1>
+        @endforelse
 
     </div>
 

@@ -2,63 +2,114 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
+use App\Models\School;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class BookController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(string $slug)
     {
-        //
+        $school = School::where('slug', $slug)->first();
+        $book = Book::where('school_id', $school->id)->get();
+
+        return view('page.book.index', compact('book', 'school'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function show(string $slug, string $bookSlug)
     {
-        //
+        $school = School::where('slug', $slug)->first();
+        $book = Book::where('slug', $bookSlug)->first();
+
+        return view('page.book.show', compact('school', 'book'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function create(string $slug)
     {
-        //
+        $school = School::where('slug', $slug)->first();
+
+        return view('page.book.create', compact('school'));
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function store(Request $request, string $slug)
     {
-        //
+        $school = School::where('slug', $slug)->first();
+
+        $request->validate([
+            'name' => 'required',
+            'image' => 'required|image|mimes:png,jpg|max:2048',
+            'file' => 'required|mimes:pdf',
+        ]);
+
+        $image = $request->file('image');
+        $file = $request->file('file');
+
+        Storage::disk('public')->putFileAs('book/image', $image, $image->hashName());
+        Storage::disk('public')->putFileAs('book/file', $file, $file->hashName());
+
+        $data = $request->all();
+        $data['school_id'] = $school->id;
+        $data['image'] = $image->hashName();
+        $data['file'] = $file->hashName();
+        $data['slug'] = Str::slug($request->name);
+
+        Book::create($data);
+
+        return redirect()->route('previlage.book.index', $slug)->with('success', 'Success Create Book');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(Request $request, string $slug, string $bookSlug)
     {
-        //
+        $book = Book::where('slug', $bookSlug)->first();
+
+        $request->validate([
+            'name' => 'required',
+        ]);
+
+        $data = $request->all();
+        $data['slug'] = Str::slug($request->name);;
+
+        if ($request->hasFile('image')) {
+            $request->validate([
+                'image' => 'required|mimes:png,jpg|max:2048|image',
+            ]);
+
+            Storage::disk('public')->delete('book/image/' . basename($book->image));
+
+            $image = $request->file('image');
+            Storage::disk('public')->putFileAs('book/image', $image, $image->hashName());
+
+            $data['image'] = $image->hashName();
+        }
+
+        if ($request->hasFile('file')) {
+            $request->validate([
+                'file' => 'required|mimes:pdf',
+            ]);
+
+            Storage::disk('public')->delete('book/file/' . basename($book->image));
+
+            $file = $request->file('file');
+            Storage::disk('public')->putFileAs('book/file', $file, $file->hashName());
+
+            $data['file'] = $file->hashName();
+        }
+
+        $book->update($data);
+
+        return redirect()->route('previlage.book.index', [$slug, $data['slug']])->with('success', 'Success Update Book');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+    public function destroy(string $slug, string $bookSlug) {
+        $book = Book::where('slug', $bookSlug)->first();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        Storage::disk('public')->delete('book/image/' . basename($book->image));
+        Storage::disk('public')->delete('book/file/' . basename($book->file));
+
+        $book->delete();
+
+        return redirect()->route('previlage.book.index', $slug)->with('success', 'Success Delete Book');
     }
 }

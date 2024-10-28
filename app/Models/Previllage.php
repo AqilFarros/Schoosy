@@ -28,4 +28,14 @@ class Previllage extends Model
     {
         return $this->hasOne(Classroom::class);
     }
+
+    public function absentClassData()
+    {
+        return $this->hasMany(AbsentClassData::class);
+    }
+
+    public function absentEmployeeData()
+    {
+        return $this->hasMany(AbsentEmployeeData::class);
+    }
 }

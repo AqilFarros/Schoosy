@@ -5,7 +5,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Schoosy</title>
-    @vite('resources/css/app.css')
+    {{-- @vite('resources/css/app.css') --}}
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'main-color': "#159947",
+                        'secondary-color': "#272727",
+                        'grey-color': '#B5B5B5'
+                    }
+                },
+                fontFamily: {
+                    TitanOne: ['Titan One', 'sans-serif'],
+                    Nunito: ['Nunito', 'sans-serif']
+                },
+                screens: {
+                    sm: "340px",
+                    md: "440px",
+                    lg: "768px",
+                    xl: "1180px",
+                },
+                container: {
+                    center: true,
+                    padding: {
+                        DEFAULT: "12",
+                        md: "32px"
+                    }
+                },
+            },
+        }
+    </script>
 
     <!---------- Favicon ---------->
     <link rel="shortcut icon" href="{{ asset('assets/Logo.png') }}" type="image/x-icon">
@@ -19,7 +50,9 @@
     @include('layouts.include.session.error')
     @include('layouts.include.session.success')
 
-    @yield('content')
+    <div class="my-4 py-1 bg-slate-100 shadow">
+        @yield('content')
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
 </body>
