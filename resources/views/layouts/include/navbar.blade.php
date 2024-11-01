@@ -7,8 +7,7 @@
                 <button id="nav-toggle" class="md:hidden">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12H4m0 6h16">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12H4m0 6h16">
                         </path>
                     </svg>
                 </button>
@@ -41,9 +40,14 @@
 
                 <button type="button" class="flex text-sm rounded-full md:me-0 " id="user-menu-button"
                     aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
-                    <img class="w-8 h-8 rounded-full"
-                        src="{{ url('storage/profile/', Auth::user()->image) }}"
-                        alt="user photo">
+                    @if (empty(Auth::user()->image))
+                        <img class="w-8 h-8 rounded-full"
+                            src="https://ui-avatars.com/api/?background=random&name={{ Auth::user()->name }}"
+                            alt="user photo">
+                    @else
+                        <img class="w-8 h-8 rounded-full" src="{{ url('storage/profile/', Auth::user()->image) }}"
+                            alt="user photo">
+                    @endif
                 </button>
 
                 <div class="z-50 hidden my-4 text-base list-none bg-white divide-y rounded-lg shadow"
@@ -63,8 +67,12 @@
                             <a href="#" class="block px-4 py-2 text-sm">Setting</a>
                         </li>
                         <li>
-                            <a href="{{ route('logout') }}" class="block px-4 py-2 text-sm">Sign
-                                out</a>
+                            <form action="{{ route('logout') }}" method="post">
+                                @csrf
+                                @method('POST')
+                                <button type="submit" class="block px-4 py-2 text-sm">Sign
+                                    out</button>
+                            </form>
                         </li>
                     </ul>
                 </div>
@@ -97,7 +105,7 @@
 </header>
 
 <script>
-    document.getElementById('nav-toggle').addEventListener('click', function () {
+    document.getElementById('nav-toggle').addEventListener('click', function() {
         var navMenu = document.getElementById('nav-menu');
         navMenu.classList.toggle('hidden');
     });

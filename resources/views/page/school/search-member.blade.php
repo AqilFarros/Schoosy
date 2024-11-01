@@ -1,4 +1,4 @@
-@include('layouts.session.error')
+{{-- @include('layouts.session.error')
 @include('layouts.session.success')
 
 <div>
@@ -31,4 +31,4 @@
     @empty
         <p>No Member</p>
     @endforelse
-</div>
+</div> --}}

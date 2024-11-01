@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Previllage;
 use App\Models\School;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -14,16 +16,18 @@ class BookController extends Controller
     {
         $school = School::where('slug', $slug)->first();
         $book = Book::where('school_id', $school->id)->get();
+        $previlage = Previllage::where('user_id', Auth::id())->where('school_id', $school->id)->first();
 
-        return view('page.book.index', compact('book', 'school'));
+        return view('page.book.index', compact('book', 'school', 'previlage'));
     }
 
     public function show(string $slug, string $bookSlug)
     {
         $school = School::where('slug', $slug)->first();
         $book = Book::where('slug', $bookSlug)->first();
+        $previlage = Previllage::where('user_id', Auth::id())->where('school_id', $school->id)->first();
 
-        return view('page.book.show', compact('school', 'book'));
+        return view('page.book.show', compact('school', 'book', 'previlage'));
     }
 
     public function create(string $slug)
@@ -58,6 +62,13 @@ class BookController extends Controller
         Book::create($data);
 
         return redirect()->route('previlage.book.index', $slug)->with('success', 'Success Create Book');
+    }
+
+    public function edit(string $slug, string $bookSlug) {
+        $school = School::where('slug', $slug)->first();
+        $book = Book::where('slug', $bookSlug)->first();
+
+        return view('page.book.edit', compact('book', 'school'));
     }
 
     public function update(Request $request, string $slug, string $bookSlug)
@@ -99,10 +110,11 @@ class BookController extends Controller
 
         $book->update($data);
 
-        return redirect()->route('previlage.book.index', [$slug, $data['slug']])->with('success', 'Success Update Book');
+        return redirect()->route('previlage.book.show', [$slug, $data['slug']])->with('success', 'Success Update Book');
     }
 
-    public function destroy(string $slug, string $bookSlug) {
+    public function destroy(string $slug, string $bookSlug)
+    {
         $book = Book::where('slug', $bookSlug)->first();
 
         Storage::disk('public')->delete('book/image/' . basename($book->image));

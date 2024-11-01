@@ -67,7 +67,7 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 md:ml-3 gap-5">
-            <a href="#" class="max-w-sm p-5 bg-white border border-gray-200 rounded-lg shadow duration-300 transition-all hover:bg-slate-100">
+            <a href="{{ route('previlage.book.index', $school->slug) }}" class="max-w-sm p-5 bg-white border border-gray-200 rounded-lg shadow duration-300 transition-all hover:bg-slate-100">
                 <div>
                     <div class="flex items-center gap-x-2">
                         <i class="fa-solid fa-book text-main-color text-2xl"></i>

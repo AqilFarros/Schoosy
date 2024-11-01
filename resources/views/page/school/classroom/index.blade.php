@@ -1,4 +1,4 @@
-@include('layouts.session.error')
+{{-- @include('layouts.session.error')
 @include('layouts.session.success')
 
 @if ($previlage == 'owner' || $previlage == 'operator')
@@ -17,4 +17,4 @@
     @endif
 @empty
     <p>No Class</p>
-@endforelse
+@endforelse --}}

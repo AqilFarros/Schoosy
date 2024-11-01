@@ -1,4 +1,4 @@
-@include('layouts.session.error')
+{{-- @include('layouts.session.error')
 @include('layouts.session.success')
 
 @if ($errors->any())
@@ -24,4 +24,4 @@
 
         <button type="submit">create</button>
     </form>
-</div>
+</div> --}}

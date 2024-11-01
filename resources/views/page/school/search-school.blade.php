@@ -1,4 +1,4 @@
-@include('layouts.session.error')
+{{-- @include('layouts.session.error')
 @include('layouts.session.success')
 
 <div>
@@ -8,4 +8,4 @@
         @method('POST')
         <button type="submit">join</button>
     </form>
-</div>
+</div> --}}

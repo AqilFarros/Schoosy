@@ -14,7 +14,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/landing-page', function () {
     return view('page.landing-page');
@@ -47,6 +47,14 @@ Route::prefix('{slug}')->name('previlage.')->group(function () {
     Route::put('/update/{prvId}', [PrevillageController::class, 'updatePrevillage'])->middleware('operator')->name('updatePrevillage');
     Route::delete('/delete/{prvId}', [PrevillageController::class, 'deletePrevillage'])->middleware('operator')->name('deletePrevillage');
 
+    Route::get('/book', [BookController::class, 'index'])->middleware('previllage')->name('book.index');
+    Route::get('/book/{bookSlug}', [BookController::class, 'show'])->middleware('previllage')->name('book.show');
+    Route::get('/book/create', [BookController::class, 'create'])->middleware('operator')->name('book.create');
+    Route::post('/book/store', [BookController::class, 'store'])->middleware('operator')->name('book.store');
+    Route::put('/book/{bookSlug}/edit', [BookController::class, 'edit'])->middleware('operator')->name('book.edit');
+    Route::put('/book/{bookSlug}/update', [BookController::class, 'update'])->middleware('operator')->name('book.update');
+    Route::delete('/book/{bookSlug}', [BookController::class, 'destroy'])->middleware('operator')->name('book.destroy');
+
     Route::get('/classroom', [ClassroomController::class, 'index'])->middleware('previllage')->name('classroom.index');
     Route::get('/{slugClassroom}', [ClassroomController::class, 'show'])->middleware('previllage')->name('classroom.show');
     Route::get('/classroom/create', [ClassroomController::class, 'create'])->middleware('operator')->name('classroom.create');
@@ -54,6 +62,4 @@ Route::prefix('{slug}')->name('previlage.')->group(function () {
     Route::get('/{slugClassroom}/edit', [ClassroomController::class, 'edit'])->middleware('operator')->name('classroom.edit');
     Route::put('/{slugClassroom}/update', [ClassroomController::class, 'update'])->middleware('operator')->name('classroom.update');
     Route::delete('/{slugClassroom}/destroy', [ClassroomController::class, 'destroy'])->middleware('operator')->name('classroom.destroy');
-
-    Route::get('/book', [BookController::class, 'index'])->middleware('previllage')->name('book.index');
 });

@@ -96,7 +96,7 @@
             </div>
         </a>
         @empty
-            <h1>You haven't join any school yet</h1>
+            <h1 class="col-span-2 text-center text-main-color font-Nunito text-4xl font-black">You haven't join any school yet</h1>
         @endforelse
 
     </div>
