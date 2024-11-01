@@ -64,7 +64,8 @@ class BookController extends Controller
         return redirect()->route('previlage.book.index', $slug)->with('success', 'Success Create Book');
     }
 
-    public function edit(string $slug, string $bookSlug) {
+    public function edit(string $slug, string $bookSlug)
+    {
         $school = School::where('slug', $slug)->first();
         $book = Book::where('slug', $bookSlug)->first();
 

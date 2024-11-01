@@ -92,16 +92,21 @@ class PrevillageController extends Controller
         }
     }
 
-    public function getPrevillage() {}
+    public function getPrevillage(string $slug) {
+        $school = School::where('slug', $slug)->first();
+        $previlage = Previllage::where('school_id', $school->id)->where('user_id', Auth::id())->first();
+
+        return view('page.school.member', compact('school', 'previlage'));
+    }
 
     public function searchPrevillage(Request $request, string $slug)
     {
-        $data = School::where('slug', $slug)->first();
-        $school = School::findOrFail($data->id);
+        $school = School::where('slug', $slug)->first();
         $query = $request->input('query');
-        $previlage = Previllage::where('school_id', $school->id)->where('name', 'LIKE', "%$query%")->get();
+        $previlage = Previllage::where('school_id', $school->id)->where('user_id', Auth::id())->first();
+        $member = Previllage::where('school_id', $school->id)->where('name', 'LIKE', "%$query%")->get();
 
-        return view('page.school.search-member', compact('school', 'previlage'));
+        return view('page.school.search-member', compact('school', 'previlage', 'query', 'member'));
     }
 
     public function updatePrevillage(Request $request, string $slug, string $prvId)

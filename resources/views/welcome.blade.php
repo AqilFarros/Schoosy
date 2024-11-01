@@ -58,8 +58,14 @@
                 @auth
                     <a href="{{ route('user.show', Auth::id()) }}">
                         <div class="pl-20 justify-start">
-                            <img src="{{ url('storage/profile/', Auth::user()->image) }}" alt="profile_image"
-                                class="border-4 border-white hover:border-yellow-400 rounded-full h-12 cursor-pointer duration-300">
+                            @if (empty(Auth::user()->image))
+                                <img src="https://ui-avatars.com/api/?background=random&name={{ Auth::user()->name }}"
+                                    alt="profile_image"
+                                    class="border-4 border-white hover:border-yellow-400 rounded-full h-12 cursor-pointer duration-300">
+                            @else
+                                <img src="{{ url('storage/profile/', Auth::user()->image) }}" alt="profile_image"
+                                    class="border-4 border-white hover:border-yellow-400 rounded-full h-12 cursor-pointer duration-300">
+                            @endif
                         </div>
                     </a>
                 @endauth

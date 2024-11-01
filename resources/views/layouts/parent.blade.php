@@ -54,9 +54,11 @@
     @include('layouts.include.session.error')
     @include('layouts.include.session.success')
 
-    <div class="my-4 py-1 bg-slate-100 shadow">
+    <div class="my-4 py-4 bg-slate-100 shadow">
         @yield('content')
     </div>
+
+    @include('layouts.include.footer')
 
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
 </body>

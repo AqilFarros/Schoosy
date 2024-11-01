@@ -39,6 +39,7 @@ Route::prefix('school')->name('school.')->group(function () {
     Route::get('/edit/{slug}', [SchoolController::class, 'edit'])->middleware('operator')->name('edit');
     Route::put('/{slug}', [SchoolController::class, 'update'])->middleware('operator')->name('update');
     Route::delete('/{slug}', [SchoolController::class, 'destroy'])->middleware('owner')->name('destroy');
+    Route::get('/member/{slug}', [PrevillageController::class, 'getPrevillage'])->middleware('previllage')->name('member');
     Route::get('/', [SchoolController::class, 'index'])->middleware('admin')->name('index');
 });
 
@@ -48,10 +49,10 @@ Route::prefix('{slug}')->name('previlage.')->group(function () {
     Route::delete('/delete/{prvId}', [PrevillageController::class, 'deletePrevillage'])->middleware('operator')->name('deletePrevillage');
 
     Route::get('/book', [BookController::class, 'index'])->middleware('previllage')->name('book.index');
-    Route::get('/book/{bookSlug}', [BookController::class, 'show'])->middleware('previllage')->name('book.show');
     Route::get('/book/create', [BookController::class, 'create'])->middleware('operator')->name('book.create');
+    Route::get('/book/{bookSlug}', [BookController::class, 'show'])->middleware('previllage')->name('book.show');
     Route::post('/book/store', [BookController::class, 'store'])->middleware('operator')->name('book.store');
-    Route::put('/book/{bookSlug}/edit', [BookController::class, 'edit'])->middleware('operator')->name('book.edit');
+    Route::get('/book/{bookSlug}/edit', [BookController::class, 'edit'])->middleware('operator')->name('book.edit');
     Route::put('/book/{bookSlug}/update', [BookController::class, 'update'])->middleware('operator')->name('book.update');
     Route::delete('/book/{bookSlug}', [BookController::class, 'destroy'])->middleware('operator')->name('book.destroy');
 

@@ -108,7 +108,18 @@ class ClassroomController extends Controller
         return redirect()->route('previlage.classroom.index', $slug)->with('success', 'Success Delete Classroom');
     }
 
-    public function addMember() {}
+    public function addMember(Request $request, string $slug, string $slugClassroom) {
+        $classroom = Classroom::where('slug', $slugClassroom)->first();
+        $members = $request->input('member');
 
-    public function deleteMember() {}
+        foreach ($members as $member) {
+            $new = Previllage::where('user_id', $member)->where('school_id', $classroom->school_id)->first();
+
+            $new->update(['classroom_id' => $classroom->id]);
+        }
+
+        return redirect()->route('previlage.classroom.show', [$slug, $slugClassroom])->with('success', 'Success Add Member');
+    }
+
+    public function deleteMember(Request $request, string $slug, string $slugClassroom) {}
 }

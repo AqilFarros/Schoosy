@@ -17,19 +17,20 @@
                     <ul
                         class="flex flex-col font-medium p-4 md:p-0 mt-4 border md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
                         <li>
-                            <a href="#" class="hover:text-main-color duration-300" aria-current="page">Home</a>
+                            <a href="{{ route('school.show', $school->slug) }}"
+                                class="hover:text-main-color duration-300" aria-current="page">School</a>
                         </li>
                         <li>
-                            <a href="#" class="hover:text-main-color duration-300">Academy</a>
+                            <a href="{{ route('previlage.book.index', $school->slug) }}"
+                                class="hover:text-main-color duration-300">Book</a>
                         </li>
                         <li>
-                            <a href="#" class="hover:text-main-color duration-300">Challenge</a>
+                            <a href="{{ route('previlage.classroom.index', $school->slug) }}"
+                                class="hover:text-main-color duration-300">Classroom</a>
                         </li>
                         <li>
-                            <a href="#" class="hover:text-main-color duration-300">Event</a>
-                        </li>
-                        <li>
-                            <a href="#" class="hover:text-main-color duration-300">Job</a>
+                            <a href="{{ route('school.member', $school->slug) }}"
+                                class="hover:text-main-color duration-300">Member</a>
                         </li>
                     </ul>
                 </div>
@@ -84,19 +85,20 @@
             <ul
                 class="font-medium p-4 bg-gray-50 rounded-lg border border-gray-100 space-y-2 md:space-y-0 md:space-x-8 md:flex-row">
                 <li>
-                    <a href="#" class="hover:text-main-color duration-300">Home</a>
+                    <a href="{{ route('school.show', $school->slug) }}"
+                        class="hover:text-main-color duration-300" aria-current="page">School</a>
                 </li>
                 <li>
-                    <a href="#" class="hover:text-main-color duration-300">Academy</a>
+                    <a href="{{ route('previlage.book.index', $school->slug) }}"
+                        class="hover:text-main-color duration-300">Book</a>
                 </li>
                 <li>
-                    <a href="#" class="hover:text-main-color duration-300">Challenge</a>
+                    <a href="{{ route('previlage.classroom.index', $school->slug) }}"
+                        class="hover:text-main-color duration-300">Classroom</a>
                 </li>
                 <li>
-                    <a href="#" class="hover:text-main-color duration-300">Event</a>
-                </li>
-                <li>
-                    <a href="#" class="hover:text-main-color duration-300">Job</a>
+                    <a href="{{ route('school.member', $school->slug) }}"
+                        class="hover:text-main-color duration-300">Member</a>
                 </li>
             </ul>
         </div>
