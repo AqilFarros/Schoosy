@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AbsentClassController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\ClassroomController;
@@ -63,4 +64,12 @@ Route::prefix('{slug}')->name('previlage.')->group(function () {
     Route::get('/{slugClassroom}/edit', [ClassroomController::class, 'edit'])->middleware('operator')->name('classroom.edit');
     Route::put('/{slugClassroom}/update', [ClassroomController::class, 'update'])->middleware('operator')->name('classroom.update');
     Route::delete('/{slugClassroom}/destroy', [ClassroomController::class, 'destroy'])->middleware('operator')->name('classroom.destroy');
+    Route::get('/{slugClassroom}/edit-member', [ClassroomController::class, 'editMember'])->middleware('operator')->name('classroom.editMember');
+    Route::put('/{slugClassroom}/add-member', [ClassroomController::class, 'addMember'])->middleware('operator')->name('classroom.addMember');
+    Route::put('/{slugClassroom}/delete-member', [ClassroomController::class, 'deleteMember'])->middleware('operator')->name('classroom.deleteMember');
+    Route::put('/{slugClassroom}/add-homeroom', [ClassroomController::class, 'addHomeroom'])->middleware('operator')->name('classroom.addHomeroom');
+    Route::put('/{slugClassroom}/remove-homeroom', [ClassroomController::class, 'removeHomeroom'])->middleware('operator')->name('classroom.removeHomeroom');
+    Route::get('/{slugClassroom}/absent/{id}', [AbsentClassController::class, 'show'])->middleware('homeroom')->name('classroom.absent');
+    Route::post('/{slugClassroom}/make-absent', [AbsentClassController::class, 'store'])->middleware('homeroom')->name('classroom.makeAbsent');
+    Route::post('/{slugClassroom}/update-absent/{id}', [AbsentClassController::class, 'updateStatus'])->middleware('homeroom')->name('classroom.updateAbsent');
 });

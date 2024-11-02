@@ -16,6 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'owner' => \App\Http\Middleware\isOwner::class,
             'operator' => \App\Http\Middleware\isOperator::class,
             'previllage' => \App\Http\Middleware\isPrevillage::class,
+            'homeroom' => \App\Http\Middleware\isHomeroom::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

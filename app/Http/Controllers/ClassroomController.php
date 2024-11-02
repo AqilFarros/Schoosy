@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AbsentClass;
 use App\Models\Classroom;
 use App\Models\Previllage;
 use App\Models\School;
@@ -24,9 +25,13 @@ class ClassroomController extends Controller
     public function show(string $slug, string $slugClassroom)
     {
         $school = School::where('slug', $slug)->first();
+        $previlage = Previllage::where('school_id', $school->id)->where('user_id', Auth::id())->first();
         $classroom = Classroom::where('slug', $slugClassroom)->first();
+        $classmate = Previllage::where('role', 'student')->where('classroom_id', $classroom->id)->orderBy('name')->get();
+        $homeroom = Previllage::where('role', 'teacher')->where('classroom_id', $classroom->id)->first();
+        $absent = AbsentClass::where('classroom_id', $classroom->id)->get();
 
-        return view('page.school.classroom.show', compact('school', 'classroom'));
+        return view('page.school.classroom.show', compact('school', 'classroom', 'classmate', 'homeroom', 'previlage', 'absent'));
     }
 
     public function create(string $slug)
@@ -69,7 +74,8 @@ class ClassroomController extends Controller
         ));
     }
 
-    public function update(Request $request, string $slug, string $slugClassroom) {
+    public function update(Request $request, string $slug, string $slugClassroom)
+    {
         $classroom = Classroom::where('slug', $slugClassroom)->first();
 
         if ($request->hasFile('image')) {
@@ -99,7 +105,8 @@ class ClassroomController extends Controller
         return redirect()->route('previlage.classroom.show', [$slug, $slugClassroom])->with('success', 'Success Update Classroom');
     }
 
-    public function destroy(string $slug, string $slugClassroom) {
+    public function destroy(string $slug, string $slugClassroom)
+    {
         $classroom = Classroom::where('slug', $slugClassroom)->first();
 
         Storage::disk('public')->delete('classroom/' . basename($classroom->image));
@@ -108,7 +115,21 @@ class ClassroomController extends Controller
         return redirect()->route('previlage.classroom.index', $slug)->with('success', 'Success Delete Classroom');
     }
 
-    public function addMember(Request $request, string $slug, string $slugClassroom) {
+    public function editMember(Request $request, string $slug, string $slugClassroom)
+    {
+        $school = School::where('slug', $slug)->first();
+        $previlage = Previllage::where('school_id', $school->id)->where('user_id', Auth::id())->first();
+        $classroom = Classroom::where('slug', $slugClassroom)->first();
+        $classmate = Previllage::where('role', 'student')->where('classroom_id', $classroom->id)->orderBy('name')->get();
+        $homeroom = Previllage::where('role', 'teacher')->where('classroom_id', $classroom->id)->first();
+        $teacher = Previllage::where('role', 'teacher')->where('classroom_id', null)->get();
+        $student = Previllage::where('role', 'student')->where('classroom_id', null)->get();
+
+        return view('page.school.classroom.edit-member', compact('school', 'classroom', 'classmate', 'homeroom', 'student', 'previlage', 'teacher'));
+    }
+
+    public function addMember(Request $request, string $slug, string $slugClassroom)
+    {
         $classroom = Classroom::where('slug', $slugClassroom)->first();
         $members = $request->input('member');
 
@@ -121,5 +142,46 @@ class ClassroomController extends Controller
         return redirect()->route('previlage.classroom.show', [$slug, $slugClassroom])->with('success', 'Success Add Member');
     }
 
-    public function deleteMember(Request $request, string $slug, string $slugClassroom) {}
+    public function deleteMember(Request $request, string $slug, string $slugClassroom)
+    {
+        $classroom = Classroom::where('slug', $slugClassroom)->first();
+        $members = $request->input('member');
+
+        foreach ($members as $member) {
+            $student = Previllage::where('user_id', $member)->where('school_id', $classroom->school_id)->first();
+
+            $student->update(['classroom_id' => null]);
+        }
+
+        return redirect()->route('previlage.classroom.show', [$slug, $slugClassroom])->with('success', 'Success Delete Member');
+    }
+
+    public function addHomeroom(Request $request, string $slug, string $slugClassroom)
+    {
+        $request->validate([
+            'teacher' => 'required'
+        ]);
+
+        $school = School::where('slug', $slug)->first();
+        $classroom = Classroom::where('slug', $slugClassroom)->first();
+
+        $teacher = Previllage::where('school_id', $school->id)->where('user_id', $request->teacher)->first();
+
+        $teacher->update([
+            'classroom_id' => $classroom->id
+        ]);
+
+        return redirect()->route('previlage.classroom.show', [$slug, $slugClassroom])->with('success', 'Success Add New Homeroom Teacher');
+    }
+
+    public function removeHomeroom(Request $request, string $slug, string $slugClassroom)
+    {
+        $teacher = Previllage::findOrFail($request->id);
+
+        $teacher->update([
+            'classroom_id' => null,
+        ]);
+
+        return redirect()->route('previlage.classroom.show', [$slug, $slugClassroom])->with('success', 'Success Remove Homeroom Teacher');
+    }
 }

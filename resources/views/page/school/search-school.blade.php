@@ -48,8 +48,6 @@
 </head>
 
 <body>
-    <!-- {{ $school->name }}
-    <img src="{{ url('storage/school/', $school->image) }}" alt=""> -->
 
     <header class="bg-slate-100 shadow">
         <nav>
@@ -66,28 +64,11 @@
                         </svg>
                     </button>
 
+                    <form action="#" method="GET">
+                        <input type="text" name="query" value="#">
+                        <button type="submit">search</button>
+                    </form>
 
-                    <div class="items-center hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
-                        <ul
-                            class="flex flex-col font-medium p-4 md:p-0 mt-4 border md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
-                            <li>
-                                <a href="#" class="hover:text-main-color duration-300"
-                                    aria-current="page">Home</a>
-                            </li>
-                            <li>
-                                <a href="#" class="hover:text-main-color duration-300">Academy</a>
-                            </li>
-                            <li>
-                                <a href="#" class="hover:text-main-color duration-300">Challenge</a>
-                            </li>
-                            <li>
-                                <a href="#" class="hover:text-main-color duration-300">Event</a>
-                            </li>
-                            <li>
-                                <a href="#" class="hover:text-main-color duration-300">Job</a>
-                            </li>
-                        </ul>
-                    </div>
                 </div>
 
 
@@ -136,27 +117,6 @@
 
             </div>
 
-            <div id="nav-menu" class="hidden md:hidden">
-                <ul
-                    class="font-medium p-4 bg-gray-50 rounded-lg border border-gray-100 space-y-2 md:space-y-0 md:space-x-8 md:flex-row">
-                    <li>
-                        <a href="#" class="hover:text-main-color duration-300">Home</a>
-                    </li>
-                    <li>
-                        <a href="#" class="hover:text-main-color duration-300">Academy</a>
-                    </li>
-                    <li>
-                        <a href="#" class="hover:text-main-color duration-300">Challenge</a>
-                    </li>
-                    <li>
-                        <a href="#" class="hover:text-main-color duration-300">Event</a>
-                    </li>
-                    <li>
-                        <a href="#" class="hover:text-main-color duration-300">Job</a>
-                    </li>
-                </ul>
-            </div>
-
         </nav>
     </header>
 
@@ -167,36 +127,55 @@
         });
     </script>
 
+    <div class="md:flex">
+        <div class="md:w-1/2 bg-slate-100 font-Nunito">
+            <img src="https://i.pinimg.com/564x/15/09/96/150996d5036e9230edc3fc48decaecd4.jpg" alt=""
+                class="w-full p-2 rounded-xl">
+            <div class="ml-2 pb-2">
+                <h2
+                    class="font-Nunito font-bold text-white bg-main-color py-1 px-2 mb-2 w-fit rounded-md hover:shadow-md hover:-translate-y-1 duration-300 cursor-pointer">
+                    IDN Boarding School
+                    Sentul</h2>
+                <div class="flex flex-col gap-2 text-lg">
+                    <div class="flex flex-row gap-2 items-center">
+                        <i class="fa-solid fa-location-dot text-main-color"></i>
+                        <p>Babakan Madang</p>
+                    </div>
 
-    <div class="w-1/2 bg-slate-200 font-Nunito">
-        <img src="https://i.pinimg.com/564x/15/09/96/150996d5036e9230edc3fc48decaecd4.jpg" alt=""
-            class="w-full p-2 rounded-xl">
-        <div class="ml-2 pb-2">
-            <h2
-                class="-ml-2 font-Nunito font-bold text-white bg-main-color py-1 px-2 w-fit rounded-md justify-self-center hover:bg-yellow-400 duration-300 cursor-pointer">
-                IDN Boarding School
-                Sentul</h2>
-            <div class="texlg">
-                <div class="flex flex-row">
-                    <i class="fa-solid fa-location-dot"></i>
-                    <p>Babakan Madang</p>
-                </div>
+                    <div class="flex flex-row gap-2 items-center">
+                        <i class="fa-solid fa-envelope text-main-color"></i>
+                        <p>idns@gmail.com</p>
+                    </div>
 
-                <div class="flex flex-row">
-                    <i class="fa-solid fa-location-dot"></i>
-                    <p>Babakan Madang</p>
-                </div>
-                
-                <div class="flex flex-row">
-                    <i class="fa-solid fa-location-dot"></i>
-                    <p>Babakan Madang</p>
-                </div>
-                
-                <div class="flex flex-row">
-                    <i class="fa-solid fa-location-dot"></i>
-                    <p>Babakan Madang</p>
+                    <div class="flex flex-row gap-2 items-center">
+                        <i class="fa-solid fa-phone text-main-color"></i>
+                        <p>081314081336</p>
+                    </div>
+
+                    <div class="flex flex-row gap-2 items-center">
+                        <i class="fa-solid fa-link text-main-color"></i>
+                        <p>www.idns.com</p>
+                    </div>
+
+                    <div class="flex flex-row gap-2 items-center">
+                        <i class="fa-solid fa-barcode text-main-color"></i>
+                        <p>IR8DF</p>
+                    </div>
                 </div>
             </div>
+        </div>
+
+        <div class="md:w-1/2">
+            <h1 class="p-2 text-2xl">Description:</h1>
+            <p class="pl-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus voluptate quam corrupti
+                commodi
+                molestias iste atque deserunt eos sunt, iusto quod in excepturi. Asperiores deleniti aliquid ratione
+                culpa tempore amet minima voluptatibus, maxime dicta dolores aliquam ex. Magni exercitationem
+                voluptatibus accusamus eveniet alias veniam eligendi totam dolores ad blanditiis, obcaecati, voluptas,
+                aliquam ut ex sequi repellendus eius laborum officiis aperiam? Qui veritatis aliquid, est eaque
+                repudiandae, minima minus, natus optio architecto molestias eum sint at. Iste, consectetur ex. Omnis
+                voluptatibus iste veritatis voluptas alias commodi minima officiis, adipisci non corporis minus. Placeat
+                numquam unde temporibus repellendus, quod odit magnam optio?</p>
         </div>
     </div>
 

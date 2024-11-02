@@ -20,7 +20,7 @@
                 </span>
                 <input type="text" id="name" name="name"
                     class="rounded-none rounded-r-lg bg-gray-50 border border-gray-300 block w-full text-sm p-2 text-gray-900"
-                    placeholder="Book Name" required>
+                    placeholder="Book Name">
             </div>
         </div>
 
@@ -28,14 +28,14 @@
             <label for="image" class="block mb-2 text-sm font-medium text-gray-900">Upload Image Cover Book</label>
             <input
                 class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 p-2"
-                name="image" id="image" type="file" required>
+                name="image" id="image" type="file">
         </div>
 
         <div>
             <label for="file" class="block mb-2 text-sm font-medium text-gray-900">File PDF Book</label>
             <input
                 class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 p-2"
-                type="file" name="file" required>
+                type="file" name="file">
         </div>
 
         <div class="col-span-1 md:col-span-2">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Previllage;
 use App\Models\School;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -61,8 +62,9 @@ class SchoolController extends Controller
     {
         $data = School::where('slug', $slug)->first();
         $school = School::findOrFail($data->id);
+        $previlage = Previllage::where('school_id', $school->id)->where('user_id', Auth::id())->first();
 
-        return view('page.school.index', compact('school'));
+        return view('page.school.index', compact('school', 'previlage'));
     }
 
     /**
@@ -94,8 +96,7 @@ class SchoolController extends Controller
             Storage::disk('public')->putFileAs('school', $image, $image->hashName());
 
             $school->update(['image' => $image->hashName()]);
-        }
-        else {
+        } else {
             $request->validate([
                 "name" => 'required|unique:schools',
                 "description" => "required",

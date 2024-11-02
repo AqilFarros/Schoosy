@@ -15,24 +15,31 @@
 
         <div class="sm:grid md:grid-cols-2 md:gap-5 md:mx-10 lg:grid lg:grid-cols-2 lg:gap-5 lg:mx-10 xl:grid-cols-3">
             @forelse ($book as $item)
-                <div class="w-72 p-6 bg-white border border-gray-200 rounded-lg shadow m-5 mx-auto">
+ <div class="w-72 p-6 bg-white border border-gray-200 rounded-lg shadow m-5 mx-auto">
                     <div class="w-60 h-56 mx-auto">
                         <img class="w-full h-full object-cover object-center rounded-t-lg" src="{{ url('storage/book/image/', $item->image) }}" alt="img buku" />
                     </div>
                     <h5 class="my-5 text-2xl font-bold tracking-tight">{{ $item->name }}</h5>
-                    <div class="flex gap-x-4">
+                    <div class="flex justify-end gap-x-4">
                         <a href="{{ url('storage/book/file/', $item->file) }}" target="_blank"
-                            class=" px-3 py-2 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 ">
+                            class=" px-3 py-2 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 duration-300 transition-all">
                             See PDF <i class="fa-solid fa-arrow-right"></i>
                         </a>
                         @if ($previlage->role == 'operator' || $previlage->role == 'owner')
                             <a href="{{ route('previlage.book.edit', [$school->slug, $item->slug]) }}"
-                                class=" px-3 py-2 text-sm font-medium text-center text-white bg-yellow-400 rounded-lg hover:bg-yellow-500 ">
-                                Edit Book <i class="fa-solid fa-pencil"></i>
+                                class=" px-3 py-2 text-sm font-medium text-center text-white bg-yellow-400 rounded-lg hover:bg-yellow-500 duration-300 transition-all">
+                                <i class="fa-solid fa-pencil"></i>
                             </a>
+                            <form action="{{ route('previlage.book.destroy', [$school->slug, $item->slug]) }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"  class=" px-3 py-2 text-sm font-medium text-center text-white bg-red-500 rounded-lg hover:bg-red-600 duration-300 transition-all">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </form>
                         @endif
                     </div>
-                </div>
+                </div>               
             @empty
                 <p class="text-center font-Nunito font-black text-3xl">belum ada buku</p>
             @endforelse

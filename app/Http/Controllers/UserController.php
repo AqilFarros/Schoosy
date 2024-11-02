@@ -53,7 +53,9 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        return view('page.user.edit', compact('user'));
     }
 
     /**
@@ -80,9 +82,11 @@ class UserController extends Controller
                 'name' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255|unique:users',
             ]);
+
+            $user->update($request->all());
         }
 
-        return redirect()->route('user.show', $id);
+        return redirect()->route('user.show', $id)->with('success', 'Success Update Profile');
     }
 
     /**
@@ -90,6 +94,6 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        
     }
 }

@@ -50,7 +50,7 @@
 </head>
 
 <body>
-    @include('layouts.include.navbar')
+    @include('layouts.include.navbar-profile')
     @include('layouts.include.session.error')
     @include('layouts.include.session.success')
     @include('layouts.include.session.error-alert')

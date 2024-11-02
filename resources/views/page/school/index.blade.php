@@ -51,18 +51,22 @@
                     <p>{{ $school->description }}</p>
                 </div>
 
-                <div class="flex justify-end gap-x-2">
-                    <a href="{{ route('school.edit', $school->slug) }}"
-                        class="inline-flex items-center px-3 text-sm font-medium text-center bg-yellow-400 rounded-xl text-white py-2 hover:bg-opacity-70 duration-300">
-                        Edit
-                    </a>
-                    <form action="{{ route('school.destroy', $school->slug) }}" method="post">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit"
-                            class="inline-flex items-center px-3 text-sm font-medium text-center bg-red-500 rounded-xl text-white py-2 hover:bg-opacity-70 duration-300">Delete</button>
-                    </form>
-                </div>
+                @if ($previlage->role == 'owner' || $previlage->role == 'operator')
+                    <div class="flex justify-end gap-x-2">
+                        <a href="{{ route('school.edit', $school->slug) }}"
+                            class="inline-flex items-center px-3 text-sm font-medium text-center bg-yellow-400 rounded-xl text-white py-2 hover:bg-opacity-70 duration-300">
+                            Edit
+                        </a>
+                        @if ($previlage->role == 'owner')
+                            <form action="{{ route('school.destroy', $school->slug) }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"
+                                    class="inline-flex items-center px-3 text-sm font-medium text-center bg-red-500 rounded-xl text-white py-2 hover:bg-opacity-70 duration-300">Delete</button>
+                            </form>
+                        @endif
+                    </div>
+                @endif
             </div>
         </div>
 
