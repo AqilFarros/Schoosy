@@ -30,7 +30,7 @@ Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
     Route::post('/approve/{id}', [AdminController::class, 'statusSchool'])->name('statusSchool');
 });
 
-Route::prefix('school')->name('school.')->group(function () {
+Route::prefix('school')->name('school.')->middleware('auth')->group(function () {
     Route::get('/search', [PrevillageController::class, 'searchSchool'])->middleware('auth')->name('searchSchool');
     // Route::get('/{code}', [PrevillageController::class, 'previewSchool'])->middleware('auth')->name('previewSchool');
     Route::post('/{code}', [PrevillageController::class, 'joinSchool'])->middleware('auth')->name('joinSchool');
@@ -70,6 +70,7 @@ Route::prefix('{slug}')->name('previlage.')->group(function () {
     Route::put('/{slugClassroom}/add-homeroom', [ClassroomController::class, 'addHomeroom'])->middleware('operator')->name('classroom.addHomeroom');
     Route::put('/{slugClassroom}/remove-homeroom', [ClassroomController::class, 'removeHomeroom'])->middleware('operator')->name('classroom.removeHomeroom');
     Route::get('/{slugClassroom}/absent/{id}', [AbsentClassController::class, 'show'])->middleware('homeroom')->name('classroom.absent');
+    Route::get('/{slugClassroom}/detail-absent/{id}', [AbsentClassController::class, 'detailAbsent'])->middleware('homeroom')->name('classroom.detailAbsent');
     Route::post('/{slugClassroom}/make-absent', [AbsentClassController::class, 'store'])->middleware('homeroom')->name('classroom.makeAbsent');
     Route::post('/{slugClassroom}/update-absent/{id}', [AbsentClassController::class, 'updateStatus'])->middleware('homeroom')->name('classroom.updateAbsent');
 });

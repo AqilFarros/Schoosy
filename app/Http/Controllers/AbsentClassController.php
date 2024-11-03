@@ -27,7 +27,16 @@ class AbsentClassController extends Controller
         $absentClass = AbsentClass::findOrFail($id);
         $student = Previllage::where('role', 'student')->where('classroom_id', $absentClass->classroom_id)->get();
 
-        return view('page.school.classroom.absent', compact('school', 'classroom','absentClass', 'student'));
+        return view('page.school.classroom.absent', compact('school', 'classroom', 'absentClass', 'student'));
+    }
+
+    public function detailAbsent(string $slug, string $slugClassroom, string $id)
+    {
+        $school = School::where('slug', $slug)->first();
+        $classroom = Classroom::where('slug', $slugClassroom)->first();
+        $absent = AbsentClass::findOrFail($id);
+
+        return view('page.school.classroom.detail-absent', compact('school', 'classroom', 'absent'));
     }
 
     public function store(Request $request, string $slug, string $slugClassroom)
@@ -60,7 +69,7 @@ class AbsentClassController extends Controller
         foreach ($students as $key => $student) {
             AbsentClassData::create([
                 'absent_class_id' => $id,
-                'previllage_id' => $student->id,
+                'previllage_id' => $student,
                 'status' => $request->status[$key]
             ]);
         }

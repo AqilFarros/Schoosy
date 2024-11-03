@@ -25,11 +25,6 @@
                         id="settings-styled-tab" data-tabs-target="#styled-settings" type="button" role="tab"
                         aria-controls="settings" aria-selected="false">Homeroom</button>
                 </li>
-                <li role="presentation">
-                    <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 "
-                        id="contacts-styled-tab" data-tabs-target="#styled-contacts" type="button" role="tab"
-                        aria-controls="contacts" aria-selected="false">Contacts</button>
-                </li>
             </ul>
         </div>
         <div id="default-styled-tab-content">
@@ -84,42 +79,44 @@
                 </form>
             </div>
             <div class="hidden p-4 rounded-lg " id="styled-settings" role="tabpanel" aria-labelledby="settings-tab">
-                <form action="{{ route('previlage.classroom.addHomeroom', [$school->slug, $classroom->slug]) }}"
-                    method="post">
-                    @csrf
-                    @method('PUT')
-                    <h2 class=" text-2xl font-bold text-green-800 mr-5 ">ADD NEW HOMEROOM</h2>
-                    <div class="flex items-center mt-3 space-x-8">
-                        <select class="bg-blue-100 text-blue-800 text-lg font-medium px-3 py-1 rounded-lg ">
-                            <option selected>Choose a country</option>
-                            <option value="US">United States</option>
-                            <option value="CA">Canada</option>
-                            <option value="FR">France</option>
-                            <option value="DE">Germany</option>
-
-                        </select>
-                        <button type="submit"
-                            class="px-3 text-sm font-medium text-center bg-green-600 rounded-md text-white py-2 hover:bg-opacity-70 duration-300">ADD <i class="fa-solid fa-plus"></i></button>
-                    </div>
-                </form>
-            </div>
-            <div class="hidden p-4 rounded-lg " id="styled-contacts" role="tabpanel" aria-labelledby="contacts-tab">
-                <form action="{{ route('previlage.classroom.removeHomeroom', [$school->slug, $classroom->slug]) }}"
-                    method="post">
-                    @csrf
-                    @method('PUT')
-                    <h2 class=" text-2xl font-bold text-green-800 mr-5 ">REMOVE HOMEROOM</h2>
-                    <div class="flex items-center mt-3 space-x-8">
-                        <img class="w-11 h-11 rounded-full" src="https://ui-avatars.com/api/?background=0D8ABC&color=fff"
-                            alt="Foto Profile">
-                        <p class="bg-blue-100 text-blue-800 text-lg font-medium px-3 py-1 rounded-lg ">
-                            ACIM
-                        </p>
-                        <button type="submit"
-                            class="px-3 text-sm font-medium text-center bg-red-600 rounded-md text-white py-2 hover:bg-opacity-70 duration-300">REMOVE
-                            <i class="fa-solid fa-trash"></i></button>
-                    </div>
-                </form>
+                @if ($homeroom)
+                    <form action="{{ route('previlage.classroom.removeHomeroom', [$school->slug, $classroom->slug]) }}"
+                        method="post">
+                        @csrf
+                        @method('PUT')
+                        <h2 class=" text-2xl font-bold text-green-800 mr-5 ">REMOVE HOMEROOM</h2>
+                        <input type="text" value="{{ $homeroom->id }}" name="teacher" hidden>
+                        <div class="flex items-center mt-3 space-x-8">
+                            <img class="w-11 h-11 rounded-full"
+                                src="https://ui-avatars.com/api/?background=0D8ABC&color=fff&name={{ $homeroom->name }}"
+                                alt="Foto Profile">
+                            <p class="bg-blue-100 text-blue-800 text-lg font-medium px-3 py-1 rounded-lg ">
+                                {{ $homeroom->name }}
+                            </p>
+                            <button type="submit"
+                                class="px-3 text-sm font-medium text-center bg-red-600 rounded-md text-white py-2 hover:bg-opacity-70 duration-300">REMOVE
+                                <i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    </form>
+                @else
+                    <form action="{{ route('previlage.classroom.addHomeroom', [$school->slug, $classroom->slug]) }}"
+                        method="post">
+                        @csrf
+                        @method('PUT')
+                        <h2 class=" text-2xl font-bold text-green-800 mr-5 ">ADD NEW HOMEROOM</h2>
+                        <div class="flex items-center mt-3 space-x-8">
+                            <select class="bg-blue-100 text-blue-800 text-lg font-medium px-3 py-1 rounded-lg"
+                                name="teacher">
+                                @foreach ($teacher as $item)
+                                    <option value="{{ $item->user_id }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                            <button type="submit"
+                                class="px-3 text-sm font-medium text-center bg-green-600 rounded-md text-white py-2 hover:bg-opacity-70 duration-300">ADD
+                                <i class="fa-solid fa-plus"></i></button>
+                        </div>
+                    </form>
+                @endif
             </div>
         </div>
 

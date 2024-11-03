@@ -8,7 +8,7 @@
         </svg>
         <span class="sr-only">Info</span>
         <div>
-            {{ $session->message }}
+            {{ session('error') }}
         </div>
     </div>
 @endif

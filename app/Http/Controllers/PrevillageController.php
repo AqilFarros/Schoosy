@@ -27,10 +27,11 @@ class PrevillageController extends Controller
             'code' => 'required'
         ]);
 
+        $code = $request->code;
         $school = School::where('code', $request->input('code'))->first();
 
         if ($school) {
-            return view('page.school.search-school', compact('school'));
+            return view('page.school.search-school', compact('school', 'code'));
         } else {
             return back()->with('error', 'School not found');
         }
@@ -114,7 +115,7 @@ class PrevillageController extends Controller
         $previllage = Previllage::findOrFail($prvId);
         $previllage->update(['role' => $request->role]);
 
-        return redirect()->route('school.show', $slug)->with('success', "Success Update Previllage Role");
+        return redirect()->back()->with('success', "Success Update Previllage Role");
     }
 
     public function deletePrevillage(string $slug, string $prvId)

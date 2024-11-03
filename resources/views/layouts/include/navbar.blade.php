@@ -46,8 +46,10 @@
                             src="https://ui-avatars.com/api/?background=random&name={{ Auth::user()->name }}"
                             alt="user photo">
                     @else
-                        <img class="w-8 h-8 rounded-full" src="{{ url('storage/profile/', Auth::user()->image) }}"
-                            alt="user photo">
+                        <div class="w-8 h-8">
+                            <img class="w-full h-full object-cover object-center rounded-full"
+                                src="{{ url('storage/profile/', Auth::user()->image) }}" alt="user photo">
+                        </div>
                     @endif
                 </button>
 
@@ -59,13 +61,7 @@
                     </div>
                     <ul class="py-2" aria-labelledby="user-menu-button">
                         <li>
-                            <a href="#" class="block px-4 py-2 text-sm">Dashboard</a>
-                        </li>
-                        <li>
                             <a href="{{ route('user.show', Auth::id()) }}" class="block px-4 py-2 text-sm">Profile</a>
-                        </li>
-                        <li>
-                            <a href="#" class="block px-4 py-2 text-sm">Setting</a>
                         </li>
                         <li>
                             <form action="{{ route('logout') }}" method="post">
@@ -85,8 +81,8 @@
             <ul
                 class="font-medium p-4 bg-gray-50 rounded-lg border border-gray-100 space-y-2 md:space-y-0 md:space-x-8 md:flex-row">
                 <li>
-                    <a href="{{ route('school.show', $school->slug) }}"
-                        class="hover:text-main-color duration-300" aria-current="page">School</a>
+                    <a href="{{ route('school.show', $school->slug) }}" class="hover:text-main-color duration-300"
+                        aria-current="page">School</a>
                 </li>
                 <li>
                     <a href="{{ route('previlage.book.index', $school->slug) }}"

@@ -11,8 +11,10 @@
                                 src="https://ui-avatars.com/api/?background=random&name={{ Auth::user()->name }}"
                                 alt="user photo">
                         @else
-                            <img class="w-8 h-8 rounded-full" src="{{ url('storage/profile/', Auth::user()->image) }}"
-                                alt="user photo">
+                            <div class="w-8 h-8">
+                                <img class="w-full h-full object-cover object-center rounded-full"
+                                    src="{{ url('storage/profile/', Auth::user()->image) }}" alt="user photo">
+                            </div>
                         @endif
                     </button>
                     <div class="z-50 hidden my-4 text-base list-none bg-white divide-y rounded-lg shadow"
@@ -23,14 +25,8 @@
                         </div>
                         <ul class="py-2" aria-labelledby="user-menu-button">
                             <li>
-                                <a href="#" class="block px-4 py-2 text-sm">Dashboard</a>
-                            </li>
-                            <li>
                                 <a href="{{ route('user.show', Auth::id()) }}"
                                     class="block px-4 py-2 text-sm">Profile</a>
-                            </li>
-                            <li>
-                                <a href="#" class="block px-4 py-2 text-sm">Setting</a>
                             </li>
                             <li>
                                 <form action="{{ route('logout') }}" method="post">

@@ -78,7 +78,7 @@
                     class="bg-white border border-gray-200 rounded-lg shadow max-w-xl mx-auto hover:bg-gray-100 duration-300">
                     <div class="flex flex-col md:flex-row items-center">
                         <img class="object-cover w-full rounded-t-lg h-32 md:h-auto md:w-32 md:rounded-none md:rounded-l-lg"
-                            src="https://i.pinimg.com/enabled_lo/236x/ae/ff/ad/aeffad664fd627431dfd04804be239ab.jpg"
+                            src="{{ url('storage/school/', $item->school->image) }}"
                             alt="{{ $item->school->name }}">
                         <div class="flex flex-col p-6 lg:p-0 md:p-0 leading-normal w-full">
                             <h5 class="mb-2 text-2xl">{{ $item->school->name }}</h5>

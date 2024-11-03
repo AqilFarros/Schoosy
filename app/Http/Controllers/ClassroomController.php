@@ -176,7 +176,7 @@ class ClassroomController extends Controller
 
     public function removeHomeroom(Request $request, string $slug, string $slugClassroom)
     {
-        $teacher = Previllage::findOrFail($request->id);
+        $teacher = Previllage::findOrFail($request->teacher);
 
         $teacher->update([
             'classroom_id' => null,
