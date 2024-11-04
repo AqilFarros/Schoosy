@@ -64,6 +64,8 @@ Route::prefix('{slug}')->name('previlage.')->group(function () {
     Route::get('/book/{bookSlug}/edit', [BookController::class, 'edit'])->middleware('operator')->name('book.edit');
     Route::put('/book/{bookSlug}/update', [BookController::class, 'update'])->middleware('operator')->name('book.update');
     Route::delete('/book/{bookSlug}', [BookController::class, 'destroy'])->middleware('operator')->name('book.destroy');
+    Route::post('book/{bookSlug}/video', [BookController::class, 'addVideo'])->middleware('operator')->name('book.addVideo');
+    Route::delete('/book/{bookSlug}/video/{id}', [BookController::class, 'deleteVideo'])->middleware('operator')->name('book.deleteVideo');
 
     Route::get('/classroom', [ClassroomController::class, 'index'])->middleware('previllage')->name('classroom.index');
     Route::get('/{slugClassroom}', [ClassroomController::class, 'show'])->middleware('previllage')->name('classroom.show');

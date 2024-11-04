@@ -17,4 +17,8 @@ class Book extends Model
     public function school() {
         return $this->belongsTo(School::class);
     }
+
+    public function videoBook() {
+        return $this->hasMany(VideoBook::class);
+    }
 }

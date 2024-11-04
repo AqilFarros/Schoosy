@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b78163c40cbccae99c0dabc96a9956a4",
+    "content-hash": "fc6de8404162d6460ae2829cb6c8270f",
     "packages": [
         {
             "name": "brick/math",
@@ -134,6 +134,64 @@
                 }
             ],
             "time": "2024-02-09T16:56:22+00:00"
+        },
+        {
+            "name": "cohensive/oembed",
+            "version": "v0.18.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/KaneCohen/oembed.git",
+                "reference": "674e8e9e59d14e4e5eb3debedfb7cf44a250940c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/KaneCohen/oembed/zipball/674e8e9e59d14e4e5eb3debedfb7cf44a250940c",
+                "reference": "674e8e9e59d14e4e5eb3debedfb7cf44a250940c",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.0|^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Cohensive\\OEmbed\\OEmbedServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Cohensive\\OEmbed\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kane Cohen",
+                    "email": "kanecohen@gmail.com"
+                }
+            ],
+            "description": "Media embed generation using OEmbed protocol.",
+            "keywords": [
+                "embed",
+                "laravel",
+                "media",
+                "oembed",
+                "vimeo",
+                "youtube"
+            ],
+            "support": {
+                "issues": "https://github.com/KaneCohen/oembed/issues",
+                "source": "https://github.com/KaneCohen/oembed/tree/v0.18.1"
+            },
+            "time": "2024-04-28T07:15:52+00:00"
         },
         {
             "name": "dflydev/dot-access-data",

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\Previllage;
 use App\Models\School;
+use App\Models\VideoBook;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -25,9 +26,14 @@ class BookController extends Controller
     {
         $school = School::where('slug', $slug)->first();
         $book = Book::where('slug', $bookSlug)->first();
+        $videoBook = VideoBook::where('book_id', $book->id)->get();
+        // $videoHTML = [];
+        // foreach ($videoBook as $video) {
+        //     array_push($videoHTML, $video->getVideoAttributes($video->url_youtube));
+        // }
         $previlage = Previllage::where('user_id', Auth::id())->where('school_id', $school->id)->first();
 
-        return view('page.book.show', compact('school', 'book', 'previlage'));
+        return view('page.book.show', compact('school', 'book', 'previlage', 'videoBook'));
     }
 
     public function create(string $slug)
@@ -124,5 +130,34 @@ class BookController extends Controller
         $book->delete();
 
         return redirect()->route('previlage.book.index', $slug)->with('success', 'Success Delete Book');
+    }
+
+    public function addVideo(Request $request, string $slug, string $bookSlug)
+    {
+        $request->validate([
+            'name' => 'required',
+            'url_youtube' => 'required|url',
+        ]);
+
+        $book = Book::where('slug', $bookSlug)->first();
+
+        VideoBook::create([
+            'book_id' => $book->id,
+            'url_youtube' => $request->url_youtube,
+        ]);
+
+        return redirect()->route(
+            'previlage.book.show',
+            [$slug, $bookSlug]
+        )->with('success', 'Success Add Video Book');
+    }
+
+    public function deleteVideo(string $slug, string $bookSlug, string $id)
+    {
+        $video = VideoBook::findOrFail($id);
+
+        $video->delete();
+
+        return redirect()->route('previlage.book.index', $slug)->with('success', 'Success Delete Video Book');
     }
 }
