@@ -28,6 +28,14 @@ Route::middleware('auth')->group(function () {
 Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/index', [AdminController::class, 'index'])->name('index');
     Route::post('/approve/{id}', [AdminController::class, 'statusSchool'])->name('statusSchool');
+    Route::get('/school', [AdminController::class, 'school'])->name('school');
+    Route::get('/book', [AdminController::class, 'book'])->name('book');
+    Route::get('/video', [AdminController::class, 'video'])->name('video');
+    Route::get('/user', [AdminController::class, 'user'])->name('user');
+    Route::delete('/delete-school', [AdminController::class, 'deleteSchool'])->name('school.delete');
+    Route::delete('/delete-book', [AdminController::class, 'deleteBook'])->name('book.delete');
+    Route::delete('/delete-video', [AdminController::class, 'deleteVideo'])->name('video.delete');
+    Route::delete('/delete-user', [AdminController::class, 'deleteUser'])->name('user.delete');
 });
 
 Route::prefix('school')->name('school.')->middleware('auth')->group(function () {
