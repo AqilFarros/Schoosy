@@ -15,8 +15,7 @@
             <p class="text-lg font-semibold ">Wali kelas {{ $homeroom?->name }}</p>
             <!-- Modal toggle -->
             <button data-modal-target="static-modal" data-modal-toggle="static-modal"
-                class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 "
-                type="button">
+                class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 " type="button">
                 Toggle modal
             </button>
 
@@ -67,8 +66,12 @@
         </div>
         @if ($previlage->role == 'owner' || $previlage->role == 'operator')
             <div class="flex justify-end my-3 gap-3">
-                <a class="text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5" href="{{ route('previlage.classroom.editMember', [$school->slug, $classroom->slug]) }}">Edit Member <i class="fa-solid fa-pen-to-square"></i></a>
-                <a class="text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5" href="{{ route('previlage.classroom.edit', [$school->slug, $classroom->slug]) }}">Edit Class <i class="fa-solid fa-pen-to-square"></i></a>
+                <a class="text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5"
+                    href="{{ route('previlage.classroom.editMember', [$school->slug, $classroom->slug]) }}">Edit Member <i
+                        class="fa-solid fa-pen-to-square"></i></a>
+                <a class="text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5"
+                    href="{{ route('previlage.classroom.edit', [$school->slug, $classroom->slug]) }}">Edit Class <i
+                        class="fa-solid fa-pen-to-square"></i></a>
             </div>
         @endif
 
@@ -111,7 +114,7 @@
                                     placeholder="Select date" name="date">
                                 <input type="text" name="classroom_id" value="{{ $classroom->id }}" hidden>
                                 <div class="grid grid-cols-2 gap-2 ">
-                                    <button type="button"
+                                    <button type="submit"
                                         class="text-white bg-blue-700 hover:bg-blue-800 0 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 ">Save</button>
                                     <button type="button" data-modal-hide="timepicker-modal"
                                         class="py-2.5 px-5 mb-2 text-sm font-medium text-gray-900  bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">Discard</button>
@@ -172,18 +175,18 @@
                 </thead>
                 <tbody>
                     @foreach ($absent as $item)
-                        <tr class="bg-slate-200">
-                            <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
-                                @if ($item->absentClassData->count() !== 0)
+                        @if ($item->absentClassData->count() !== 0)
+                            <tr class="bg-slate-200">
+                                <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
                                     {{ $item->date }}
-                                @endif
-                            </th>
-                            <th class="px-6 py-4">
-                                <a class="px-3 py-2 text-sm font-medium text-white bg-green-700 rounded-lg hover:bg-green-800 duration-300 transition-all"
-                                    href="{{ route('previlage.classroom.detailAbsent', [$school->slug, $classroom->slug, $item->id]) }}">See
-                                    Detail <i class="fa-solid fa-eye"></i></a>
-                            </th>
-                        </tr>
+                                </th>
+                                <th class="px-6 py-4">
+                                    <a class="px-3 py-2 text-sm font-medium text-white bg-green-700 rounded-lg hover:bg-green-800 duration-300 transition-all"
+                                        href="{{ route('previlage.classroom.detailAbsent', [$school->slug, $classroom->slug, $item->id]) }}">See
+                                        Detail <i class="fa-solid fa-eye"></i></a>
+                                </th>
+                            </tr>
+                        @endif
                     @endforeach
                 </tbody>
             </table>

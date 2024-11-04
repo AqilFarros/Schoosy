@@ -8,6 +8,7 @@ use App\Models\AbsentClassNote;
 use App\Models\Classroom;
 use App\Models\Previllage;
 use App\Models\School;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class AbsentClassController extends Controller
@@ -48,10 +49,14 @@ class AbsentClassController extends Controller
             'date' => 'required'
         ]);
 
+        $formattedDate = Carbon::createFromFormat('m/d/Y', $request->date)
+            ->setTimeFrom(Carbon::now()) // Set time from the current time
+            ->format('Y-m-d H:i:s');
+
         AbsentClass::create([
             'school_id' => $school->id,
             'classroom_id' => $request->classroom_id,
-            'date' => $request->date
+            'date' => $formattedDate
         ]);
 
         return redirect()->route('previlage.classroom.show', [$slug, $slugClassroom])->with('success', 'Success Create Absent Class');
@@ -61,7 +66,6 @@ class AbsentClassController extends Controller
     {
         $request->validate([
             'student' => 'required',
-            'note' => 'string'
         ]);
 
         $students = $request->input('student');
