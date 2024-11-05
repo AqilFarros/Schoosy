@@ -67,10 +67,12 @@ class ClassroomController extends Controller
     {
         $school = School::where('slug', $slug)->first();
         $classroom = Classroom::where('slug', $slugClassroom)->first();
+        $previlage = Previllage::where('school_id', $school->id)->where('user_id', Auth::id())->first();
 
         return view('page.school.classroom.edit', compact(
             'classroom',
             'school',
+            'previlage'
         ));
     }
 

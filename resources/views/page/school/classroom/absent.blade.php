@@ -10,13 +10,18 @@
                 <div class="bg-white flex flex-row gap-5 items-center p-2 rounded-xl pl-3">
                     <p class="bg-slate-100 py-1 px-3 rounded-full">{{ $loop->iteration }}</p>
                     <div class="h-8 rounded-full overflow-hidden">
-                        <img class="w-full h-full object-cover object-center rounded-full"
-                            src="https://ui-avatars.com/api/?background=random&name={{ $item->name }}" alt="user photo">
+                        @if (empty($item->user->image))
+                            <img class="w-full h-full rounded-full"
+                                src="https://ui-avatars.com/api/?background=random&name={{ $item->name }}"
+                                alt="Profile Image">
+                        @else
+                            <img class="w-full h-full rounded-full object-center object-cover"
+                                src="{{ url('storage/profile/', $itemm->user->image) }}" alt="Profile Image">
+                        @endif
                     </div>
                     <input type="text" name="student[]" value="{{ $item->id }}" hidden>
                     <p class="text-">{{ $item->name }}</p>
-                    <select name="status[]" id=""
-                        class="bg-slate-100 rounded-lg p-1 cursor-pointer">
+                    <select name="status[]" id="" class="bg-slate-100 rounded-lg p-1 cursor-pointer">
                         <option value="attendence" class="bg-main-color text-white">attendence</option>
                         <option value="permission" class="bg-blue-500 text-white">permission</option>
                         <option value="sick" class="bg-yellow-400 text-white">sick</option>

@@ -3,15 +3,15 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">ALL book</h5>
+            <h5 class="card-title">All Book</h5>
             <table class="table">
-                <thead></thead>
+                <thead>
                 <tr>
                     <th scope="col">No</th>
-                    <th scope="col">Name Of book</th>
+                    <th scope="col">Name of Book</th>
                     <th scope="col">File</th>
-                    <th scope="col">image</th>
-                    <th scope="col">action</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Action</th>
                 </tr>
                 </thead>
                 <tbody>

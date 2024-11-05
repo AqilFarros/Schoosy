@@ -36,10 +36,16 @@
                             {{ $loop->iteration }}
                         </td>
                         <td class="px-6 py-4 flex flex-row gap-2 items-center">
-                            <img class="w-8 h-8 rounded-full"
-                                src="https://ui-avatars.com/api/?background=random&name={{ $item->name }}"
-                                alt="user photo">
-                            <p>{{ $item->name }}</p>
+                            <div class="w-8 h-8">
+                                @if (empty($item->user->image))
+                                    <img class="w-full h-full rounded-full"
+                                        src="https://ui-avatars.com/api/?background=random&name={{ $item->name }}"
+                                        alt="Profile Image">
+                                @else
+                                    <img class="w-full h-full rounded-full object-center object-cover"
+                                        src="{{ url('storage/profile/', $item->user->image) }}" alt="Profile Image">
+                                @endif
+                            </div>
                         </td>
                         <td>
                             @if ($item->role == 'owner')
@@ -70,7 +76,8 @@
                                             @endif
                                         </select>
 
-                                        <button type="submit" class="bg-yellow-400 text-white hover:bg-white hover:text-yellow-400 px-3 py-1 rounded-lg duration-300">update</button>
+                                        <button type="submit"
+                                            class="bg-yellow-400 text-white hover:bg-white hover:text-yellow-400 px-3 py-1 rounded-lg duration-300">update</button>
                                     </form>
                                 @else
                                     <p>{{ $item->role }}</p>

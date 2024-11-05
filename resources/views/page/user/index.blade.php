@@ -44,11 +44,16 @@
                         <a href="{{ route('user.edit', Auth::id()) }}"
                             class="text-white bg-yellow-400 hover:bg-yellow-500 font-medium rounded-lg text-sm px-4 py-2 transition-all">Edit
                             Profile</a>
-                        <form action="#" method="post">
+                        @if (Auth::user()->role == 'admin')
+                            <a href="{{ route('admin.index') }}"
+                                class="text-white bg-purple-600 hover:bg-purple-700 font-medium rounded-lg text-sm px-4 py-2 transition-all">Admin
+                                Page</a>
+                        @endif
+                        {{-- <form action="#" method="post">
                             <button type="submit"
                                 class="text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-4 py-2 transition-all">Delete
                                 Account</button>
-                        </form>
+                        </form> --}}
                     </div>
                 </div>
             </div>
@@ -78,8 +83,7 @@
                     class="bg-white border border-gray-200 rounded-lg shadow max-w-xl mx-auto hover:bg-gray-100 duration-300">
                     <div class="flex flex-col md:flex-row items-center">
                         <img class="object-cover w-full rounded-t-lg h-32 md:h-auto md:w-32 md:rounded-none md:rounded-l-lg"
-                            src="{{ url('storage/school/', $item->school->image) }}"
-                            alt="{{ $item->school->name }}">
+                            src="{{ url('storage/school/', $item->school->image) }}" alt="{{ $item->school->name }}">
                         <div class="flex flex-col p-6 lg:p-0 md:p-0 leading-normal w-full">
                             <h5 class="mb-2 text-2xl">{{ $item->school->name }}</h5>
                             <p class="mb-2"><i class="fa-regular fa-envelope"></i> {{ $item->school->email }}

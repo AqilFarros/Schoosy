@@ -2,7 +2,9 @@
     <nav>
         <div class="flex justify-between items-end md:items-center w-[92%] mx-auto py-3">
             <div class="flex justify-between w-full">
-                <span class="text-3xl font-semibold font-TitanOne text-main-color">Schoosy</span>
+                <a href="/">
+                    <span class="text-3xl font-semibold font-TitanOne text-main-color">Schoosy</span>
+                </a>
                 <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                     <button type="button" class="flex text-sm rounded-full md:me-0 " id="user-menu-button"
                         aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">

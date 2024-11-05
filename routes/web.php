@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AbsentClassController;
+use App\Http\Controllers\AbsentEmployeeController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\ClassroomController;
@@ -32,10 +33,10 @@ Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/book', [AdminController::class, 'book'])->name('book');
     Route::get('/video', [AdminController::class, 'video'])->name('video');
     Route::get('/user', [AdminController::class, 'user'])->name('user');
-    Route::delete('/delete-school', [AdminController::class, 'deleteSchool'])->name('school.delete');
-    Route::delete('/delete-book', [AdminController::class, 'deleteBook'])->name('book.delete');
-    Route::delete('/delete-video', [AdminController::class, 'deleteVideo'])->name('video.delete');
-    Route::delete('/delete-user', [AdminController::class, 'deleteUser'])->name('user.delete');
+    Route::delete('/delete-school/{id}', [AdminController::class, 'deleteSchool'])->name('school.delete');
+    Route::delete('/delete-book/{id}', [AdminController::class, 'deleteBook'])->name('book.delete');
+    Route::delete('/delete-video/{id}', [AdminController::class, 'deleteVideo'])->name('video.delete');
+    Route::delete('/delete-user/{id}', [AdminController::class, 'deleteUser'])->name('user.delete');
 });
 
 Route::prefix('school')->name('school.')->middleware('auth')->group(function () {
@@ -66,6 +67,9 @@ Route::prefix('{slug}')->name('previlage.')->group(function () {
     Route::delete('/book/{bookSlug}', [BookController::class, 'destroy'])->middleware('operator')->name('book.destroy');
     Route::post('book/{bookSlug}/video', [BookController::class, 'addVideo'])->middleware('operator')->name('book.addVideo');
     Route::delete('/book/{bookSlug}/video/{id}', [BookController::class, 'deleteVideo'])->middleware('operator')->name('book.deleteVideo');
+
+    Route::get('/absent-employee', [AbsentEmployeeController::class, 'index'])->middleware('operator')->name('absentEmployee.index');
+    Route::post('/absent-employee/make-absent', [AbsentEmployeeController::class, 'makeAbsent'])->middleware('operator')->name('absentEmployee.makeAbsent');
 
     Route::get('/classroom', [ClassroomController::class, 'index'])->middleware('previllage')->name('classroom.index');
     Route::get('/{slugClassroom}', [ClassroomController::class, 'show'])->middleware('previllage')->name('classroom.show');

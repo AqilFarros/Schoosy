@@ -7,6 +7,7 @@ use App\Models\Book;
 use App\Models\Previllage;
 use App\Models\School;
 use App\Models\User;
+use App\Models\VideoBook;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -60,8 +61,11 @@ class AdminController extends Controller
         return view('admin.book', compact('book'));
     }
 
-    public function video() {
-        return view('admin.video');
+    public function video()
+    {
+        $video = VideoBook::latest()->get();
+
+        return view('admin.video', compact('video'));
     }
 
     public function user()
@@ -94,7 +98,13 @@ class AdminController extends Controller
         return redirect()->route('admin.book');
     }
 
-    public function deleteVideo() {}
+    public function deleteVideo(string $id) {
+        $video = VideoBook::findOrFail($id);
+
+        $video->delete();
+
+        return redirect()->route('admin.video');
+    }
 
     public function deleteUser(string $id)
     {

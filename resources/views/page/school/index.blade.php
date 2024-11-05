@@ -5,12 +5,12 @@
 
         <div class="max-w-[500px] w-[100%] bg-white border border-gray-200 rounded-lg shadow mb-5 md:mb-0 overflow-hidden">
             <div class="bg-main-color">
-                <div class="flex items-center justify-center py-2 w-[16rem] h-[16rem] mx-auto">
+                <div class="flex items-center justify-center py-2 w-[13em] h-[14em] lg:w-[16rem] lg:h-[16rem] mx-auto">
                     <img class="w-full h-full object-cover object-center rounded-full"
                         src="{{ url('storage/school/', $school->image) }}" alt="school" />
-                    <div class="relative w-14 h-10 bg-gray-300 top-20 -left-6 lg:top-20 lg:left-28 rounded-full">
+                    <div class="relative w-14 h-10 top-20 -left-5 lg:top-20 lg:left-20 rounded-full">
                         <i
-                            class="fa-solid fa-pencil absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 "></i>
+                            class="fa-solid fa-pencil bg-gray-300 p-2 rounded-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 "></i>
                     </div>
                 </div>
             </div>

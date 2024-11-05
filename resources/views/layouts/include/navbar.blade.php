@@ -2,7 +2,9 @@
     <nav>
         <div class="flex justify-between items-end md:items-center w-[92%] mx-auto py-3">
             <div class="flex space-x-11">
-                <span class="text-3xl font-semibold font-TitanOne text-main-color">Schoosy</span>
+                <a href="/">
+                    <span class="text-3xl font-semibold font-TitanOne text-main-color">Schoosy</span>
+                </a>
 
                 <button id="nav-toggle" class="md:hidden">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -32,6 +34,12 @@
                             <a href="{{ route('school.member', $school->slug) }}"
                                 class="hover:text-main-color duration-300">Member</a>
                         </li>
+                        @if ($previlage->role == 'owner' || $previlage->role == 'operator')
+                            <li>
+                                <a href="{{ route('previlage.absentEmployee.index', $school->slug) }}"
+                                    class="hover:text-main-color duration-300">Absent</a>
+                            </li>
+                        @endif
                     </ul>
                 </div>
             </div>

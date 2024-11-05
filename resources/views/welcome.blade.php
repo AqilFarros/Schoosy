@@ -17,7 +17,9 @@
 <body>
     <header id="navbar" class="bg-main-color fixed w-full top-0 left-0 z-50">
         <nav class="container flex items-center justify-between h-16 sm:h-20">
-            <div class="font-TitanOne sm:text-2xl">Schoosy</div>
+            <div class="font-TitanOne sm:text-2xl">
+                <a href="/">Schoosy</a>
+            </div>
 
             <div id="nav-menu"
                 class="absolute top-0 left-[-100%] min-h-[80vh] w-full bg-main-color/80 backdrop-blur-sm flex items-center justify-center duration-300 overflow-hidden lg:static lg:min-h-fit lg:bg-transparent lg:w-auto">
@@ -107,12 +109,22 @@
 
                         <div class="font-Nunito flex flex-col gap-2 sm:flex-row md:gap-4 lg:pt-1 xl:pt-3">
                             <button class="btn">
-                                <span>Get Started</span>
+                                @if (Auth::check())
+                                    <a href="{{ route('user.show', Auth::id()) }}">
+                                        <span>Get Started</span>
+                                    </a>
+                                @else
+                                <a href="{{ route('login') }}">
+                                    <span>Get Started</span>
+                                </a>
+                                @endif
                                 <i class="ri-medal-fill"></i>
                             </button>
 
                             <button class="btn btn_outline">
-                                <span>Know More</span>
+                                <a href="#about">
+                                    <span>Know More</span>
+                                </a>
                                 <i class="ri-arrow-right-circle-fill"></i>
                             </button>
                         </div>

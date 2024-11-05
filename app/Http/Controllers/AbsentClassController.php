@@ -10,6 +10,7 @@ use App\Models\Previllage;
 use App\Models\School;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AbsentClassController extends Controller
 {
@@ -27,8 +28,9 @@ class AbsentClassController extends Controller
         $classroom = Classroom::where('slug', $slugClassroom)->first();
         $absentClass = AbsentClass::findOrFail($id);
         $student = Previllage::where('role', 'student')->where('classroom_id', $absentClass->classroom_id)->get();
+        $previlage = Previllage::where('school_id', $school->id)->where('user_id', Auth::id())->first();
 
-        return view('page.school.classroom.absent', compact('school', 'classroom', 'absentClass', 'student'));
+        return view('page.school.classroom.absent', compact('school', 'classroom', 'absentClass', 'student', 'previlage'));
     }
 
     public function detailAbsent(string $slug, string $slugClassroom, string $id)
@@ -36,8 +38,9 @@ class AbsentClassController extends Controller
         $school = School::where('slug', $slug)->first();
         $classroom = Classroom::where('slug', $slugClassroom)->first();
         $absent = AbsentClass::findOrFail($id);
+        $previlage = Previllage::where('school_id', $school->id)->where('user_id', Auth::id())->first();
 
-        return view('page.school.classroom.detail-absent', compact('school', 'classroom', 'absent'));
+        return view('page.school.classroom.detail-absent', compact('school', 'classroom', 'absent', 'previlage'));
     }
 
     public function store(Request $request, string $slug, string $slugClassroom)
@@ -50,7 +53,7 @@ class AbsentClassController extends Controller
         ]);
 
         $formattedDate = Carbon::createFromFormat('m/d/Y', $request->date)
-            ->setTimeFrom(Carbon::now()) // Set time from the current time
+            ->setTimeFrom(Carbon::now())
             ->format('Y-m-d H:i:s');
 
         AbsentClass::create([

@@ -3,12 +3,12 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">ALL SCHOOL</h5>
+            <h5 class="card-title">All School</h5>
             <table class="table">
                 <thead>
                     <tr>
                         <th scope="col">No</th>
-                        <th scope="col">Name Of School</th>
+                        <th scope="col" >Name of School</th>
                         <th scope="col">Email</th>
                         <th scope="col">Address</th>
                         <th scope="col">Phone</th>
