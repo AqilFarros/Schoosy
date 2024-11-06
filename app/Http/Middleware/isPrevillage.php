@@ -22,7 +22,7 @@ class isPrevillage
         if (!$school) return redirect()->route('user.show', Auth::id())->with('error', 'School not found');
         $previllage = Previllage::where('user_id', Auth::id())->where('school_id', $school->id)->first();
 
-        if ($previllage || (Auth::check() && Auth::user()->role == 'admin')) {
+        if ($previllage && (Auth::check())) {
             return $next($request);
         }
 

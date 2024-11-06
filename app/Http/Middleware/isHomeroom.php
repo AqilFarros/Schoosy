@@ -25,7 +25,7 @@ class isHomeroom
         if (!$classroom) return redirect()->routeroute('user.show', Auth::id())->with('error', 'Classroom not found');
         $previllage = Previllage::where('user_id', Auth::id())->where('school_id', $school->id)->first();
 
-        if (Auth::check() && ($previllage->role == 'owner' || $previllage->role == 'operator' || Auth::user()->role == 'admin' || ($previllage->classroom_id == $classroom->id && $previllage->role == 'teacher'))) {
+        if (Auth::check() && ($previllage?->role == 'owner' || $previllage?->role == 'operator' || ($previllage?->classroom_id == $classroom?->id && $previllage?->role == 'teacher'))) {
             return $next($request);
         }
 

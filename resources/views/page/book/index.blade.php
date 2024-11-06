@@ -8,8 +8,7 @@
         @if ($previlage->role == 'operator' || $previlage->role == 'owner')
             <div class="flex justify-end">
                 <a href="{{ route('previlage.book.create', $school->slug) }}"
-                    class="m-3 bg-blue-600 text-white hover:bg-blue-800 mb-4 inline-block font-medium duration-200 p-3 rounded-lg">buat
-                    buku</a>
+                    class="m-3 bg-blue-600 text-white hover:bg-blue-800 mb-4 inline-block font-medium duration-200 p-3 rounded-lg">Create Book</a>
             </div>
         @endif
 

@@ -28,7 +28,7 @@
             </div>
             <div class="px-5 py-2">
                 <p class="font-Nunito font-black text-3xl">{{ $school->name }}</p>
-                <div class="grid grid-cols-2">
+                <div class="grid">
                     <div class="flex items-center gap-x-2">
                         <i class="fa-regular fa-envelope text-red-600"></i>
                         <p class="font-normal">{{ $school->email }}</p>
@@ -42,7 +42,7 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-2">
+                <div class="grid">
                     <div class="flex items-center gap-x-2">
                         <i class="fa-solid fa-puzzle-piece text-green-600"></i>
                         <p class="font-normal">{{ $school->code }}</p>
@@ -51,7 +51,7 @@
                     <div class="flex items-center gap-x-2">
                         <i class="fa-solid fa-globe text-blue-600"></i>
                         <p class="font-normal">
-                            {{ $school->website }}
+                            {{ $school?->website }}
                         </p>
                     </div>
                 </div>

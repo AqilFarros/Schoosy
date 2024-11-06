@@ -2,10 +2,11 @@
 
 @section('content')
     <div class="grid justify-center items-center">
-        <div class="w-[32rem] h-96">
+        <div class="w-[18rem] h-64  md:w-[32rem] md:h-96">
             <img class="w-full h-full object-cover object-center rounded-sm"
                 src="{{ url('storage/classroom/', $classroom->image) }}" alt="class photo">
         </div>
+
         <div class="my-3 flex justify-between">
             <h2 class="text-3xl font-bold ">{{ $classroom->name }}</h2>
             <p class="text-2xl"><i class="fa-solid fa-people-group"></i> {{ $classroom->previllage->count() }}</p>
@@ -53,8 +54,7 @@
                                                 alt="user photo">
                                         @else
                                             <img class="w-full h-full object-cover object-center rounded-full"
-                                                src="{{ url('storage/profile/', $item->user->image) }}"
-                                                alt="user photo">
+                                                src="{{ url('storage/profile/', $item->user->image) }}" alt="user photo">
                                         @endif
                                     </div>
                                     <p class="text-">{{ $item->name }}</p>
@@ -70,6 +70,7 @@
                 </div>
             </div>
         </div>
+
         @if ($previlage->role == 'owner' || $previlage->role == 'operator')
             <div class="flex justify-end my-3 gap-3">
                 <a class="text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5"
@@ -78,6 +79,17 @@
                 <a class="text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5"
                     href="{{ route('previlage.classroom.edit', [$school->slug, $classroom->slug]) }}">Edit Class <i
                         class="fa-solid fa-pen-to-square"></i></a>
+            </div>
+
+            <div class="flex justify-end my-3 gap-3">
+                <form action="{{ route('previlage.classroom.destroy', [$school->slug, $classroom->slug]) }}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit"
+                        class="text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-2.5"
+                        href="{{ route('previlage.classroom.edit', [$school->slug, $classroom->slug]) }}">Delete Class <i
+                            class="fa-solid fa-trash"></i></button>
+                </form>
             </div>
         @endif
 

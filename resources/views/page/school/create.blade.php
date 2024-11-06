@@ -5,7 +5,7 @@
         @csrf
         @method('POST')
         <div>
-            <label for="">Name Of School</label>
+            <label for="">School Name</label>
             <input class=" border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2" type="text" name="name" value="{{ old('name') }}">
         </div>
 
@@ -15,7 +15,7 @@
         </div>
 
         <div>
-            <label for="">Schhol Phone Number</label>
+            <label for="">School Phone Number</label>
             <input class=" border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2"  type="text" name="phone" value="{{ old('phone') }}">
         </div>
 

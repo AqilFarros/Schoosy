@@ -33,7 +33,7 @@
                     <div class="grid lg:flex md:flex">
                         <p class="text-white"><i class="fa-regular fa-envelope"></i> {{ Auth::user()->email }}
                         </p>
-                        <p class="text-white lg:ml-5 md:ml-5"><i class="fa-regular fa-clock"></i> Bergabung sejak
+                        <p class="text-white lg:ml-5 md:ml-5"><i class="fa-regular fa-clock"></i> Join since
                             {{ Auth::user()->created_at->format('Y') }}
                         </p>
                     </div>
@@ -84,14 +84,14 @@
                     <div class="flex flex-col md:flex-row items-center">
                         <img class="object-cover w-full rounded-t-lg h-32 md:h-auto md:w-32 md:rounded-none md:rounded-l-lg"
                             src="{{ url('storage/school/', $item->school->image) }}" alt="{{ $item->school->name }}">
-                        <div class="flex flex-col p-6 lg:p-0 md:p-0 leading-normal w-full">
+                        <div class="flex flex-col ml-3 p-6 lg:p-0 md:p-0 leading-normal w-full">
                             <h5 class="mb-2 text-2xl">{{ $item->school->name }}</h5>
                             <p class="mb-2"><i class="fa-regular fa-envelope"></i> {{ $item->school->email }}
                             </p>
                             <div class="flex gap-1">
-                                <p class=""><i class="fa-regular fa-clock"></i> Bergabung sejak
+                                <p class=""><i class="fa-regular fa-clock"></i> Join since
                                     {{ $item->school->created_at->format('Y') }}</p>
-                                <p class=""><i class="fa-solid fa-people-group"></i> Jumlah anggota
+                                <p class=""><i class="fa-solid fa-people-group"></i> Total member
                                     <span>{{ $item->school->previllage->count() }}</span>
                                 </p>
                             </div>

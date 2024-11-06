@@ -2,14 +2,16 @@
 
 @section('content')
     <div class="grid justify-center items-center">
-        <div class="w-[32rem] h-96">
+        <div class="w-[18rem] h-64  md:w-[32rem] md:h-96 mx-auto">
             <img class="w-full h-full object-cover object-center rounded-sm"
                 src="{{ url('storage/school/', $school->image) }}" alt="class photo">
         </div>
+        
         <div class="my-3 flex justify-between">
             <h2 class="text-3xl font-bold ">{{ $school->name }}</h2>
             <p class="text-2xl"><i class="fa-solid fa-people-group"></i> {{ $teacher->count() }}</p>
         </div>
+        
         <div class="flex justify-end items-center">
             <!-- Modal toggle -->
             <button data-modal-target="static-modal" data-modal-toggle="static-modal"

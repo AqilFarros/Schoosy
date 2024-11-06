@@ -37,8 +37,9 @@ class ClassroomController extends Controller
     public function create(string $slug)
     {
         $school = School::where('slug', $slug)->first();
+        $previlage = Previllage::where('school_id', $school->id)->where('user_id', Auth::id())->first();
 
-        return view('page.school.classroom.create', compact('school'));
+        return view('page.school.classroom.create', compact('school', 'previlage'));
     }
 
     public function store(Request $request, string $slug)
@@ -122,16 +123,20 @@ class ClassroomController extends Controller
         $school = School::where('slug', $slug)->first();
         $previlage = Previllage::where('school_id', $school->id)->where('user_id', Auth::id())->first();
         $classroom = Classroom::where('slug', $slugClassroom)->first();
-        $classmate = Previllage::where('role', 'student')->where('classroom_id', $classroom->id)->orderBy('name')->get();
-        $homeroom = Previllage::where('role', 'teacher')->where('classroom_id', $classroom->id)->first();
-        $teacher = Previllage::where('role', 'teacher')->where('classroom_id', null)->get();
-        $student = Previllage::where('role', 'student')->where('classroom_id', null)->get();
+        $classmate = Previllage::where('role', 'student')->where('school_id', $school->id)->where('classroom_id', $classroom->id)->orderBy('name')->get();
+        $homeroom = Previllage::where('role', 'teacher')->where('school_id', $school->id)->where('classroom_id', $classroom->id)->first();
+        $teacher = Previllage::where('role', 'teacher')->where('school_id', $school->id)->where('classroom_id', null)->get();
+        $student = Previllage::where('role', 'student')->where('school_id', $school->id)->where('classroom_id', null)->get();
 
         return view('page.school.classroom.edit-member', compact('school', 'classroom', 'classmate', 'homeroom', 'student', 'previlage', 'teacher'));
     }
 
     public function addMember(Request $request, string $slug, string $slugClassroom)
     {
+        $request->validate([
+            'member' => 'required'
+        ]);
+
         $classroom = Classroom::where('slug', $slugClassroom)->first();
         $members = $request->input('member');
 
@@ -146,6 +151,10 @@ class ClassroomController extends Controller
 
     public function deleteMember(Request $request, string $slug, string $slugClassroom)
     {
+        $request->validate([
+            'member' => 'required'
+        ]);
+
         $classroom = Classroom::where('slug', $slugClassroom)->first();
         $members = $request->input('member');
 

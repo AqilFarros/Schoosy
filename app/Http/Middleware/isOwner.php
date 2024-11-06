@@ -22,7 +22,7 @@ class isOwner
         if (!$school) return redirect()->route('user.show', Auth::id())->with('error', 'School not found');
         $previllage = Previllage::where('user_id', Auth::id())->where('school_id', $school->id)->first();
 
-        if (Auth::check() && ($previllage->role == 'owner' || Auth::user()->role == 'admin')) {
+        if (Auth::check() && ($previllage?->role == 'owner')) {
             return $next($request);
         }
 

@@ -8,7 +8,7 @@
     <div class="mx-5 grid grid-cols-1 md:grid-cols-2 gap-6">
 
         <div>
-            <label for="">Name</label>
+            <label for="">Name Of Class</label>
             <input class="border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2" type="text"
                 name="name" value="{{ old('name') }}">
         </div>

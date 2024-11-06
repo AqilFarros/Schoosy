@@ -6,7 +6,7 @@
     @if ($previlage->role == 'owner' || $previlage->role == 'operator')
         <div class="flex justify-end">
             <a class="m-3 bg-blue-600 text-white hover:bg-blue-800 mb-4 inline-block font-medium duration-200 p-3 rounded-lg"
-                href="{{ route('previlage.classroom.create', $school->slug) }}">Buat Kelas</a>
+                href="{{ route('previlage.classroom.create', $school->slug) }}">Create Class</a>
         </div>
     @endif
 
@@ -24,7 +24,7 @@
                 <div class="flex justify-end gap-x-4">
                     <a href="{{ route('previlage.classroom.show', [$school->slug, $item->slug]) }}"
                         class=" px-3 py-2 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 duration-300 transition-all">
-                        Lihat Kelas <i class="fa-solid fa-arrow-right"></i>
+                        See Class <i class="fa-solid fa-arrow-right"></i>
                     </a>
                 </div>
             </div>

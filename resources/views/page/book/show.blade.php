@@ -18,15 +18,15 @@
             @method('POST')
 
             <div>
-                <label for="" class="block mb-2 text-sm font-medium text-gray-900">Name Video</label>
-                <input type="text" name="name"
+                <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Name Video</label>
+                <input type="text" name="name" id="name"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-                    placeholder="Video Buku Bahasa indonesia" value="{{ old('name') }}">
+                    placeholder="english book XI" value="{{ old('name') }}">
             </div>
 
             <div class="mt-4">
-                <label for="" class="block mb-2 text-sm font-medium text-gray-900">Youtube Url</label>
-                <input type="text" name="url_youtube"
+                <label for="url_youtube" class="block mb-2 text-sm font-medium text-gray-900">Youtube Url</label>
+                <input type="text" name="url_youtube" id="url_youtube"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
                     value="{{ old('url_youtube') }}">
             </div>
@@ -40,10 +40,10 @@
         </form>
     @endif
 
-    @forelse ($videoBook as $item)
-        <div class="flex">
-            <div class="max-w-md mx-auto bg-white shadow-md rounded-lg p-4 border border-gray-200">
 
+    <div class="flex flex-wrap gap-3">
+        @forelse ($videoBook as $item)
+            <div class="max-w-md mx-auto bg-white shadow-md rounded-lg p-4 border border-gray-200">
                 <div class="mb-4">
                     {!! $item->getVideoAttributes($item->url_youtube) !!}
                 </div>
@@ -61,9 +61,8 @@
                     </form>
                 @endif
             </div>
-        </div>
-
-    @empty
-        <p class="text-center font-Nunito font-black text-3xl">No Video Have Been Added Yet.</p>
-    @endforelse
+        @empty
+            <p class="text-center font-Nunito font-black text-3xl">No Video Have Been Added Yet.</p>
+        @endforelse
+    </div>
 @endsection

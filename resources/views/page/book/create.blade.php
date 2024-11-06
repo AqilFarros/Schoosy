@@ -1,10 +1,10 @@
 @extends('layouts.parent')
 
 @section('content')
-<a href="{{ route('previlage.book.index', $school->slug) }}"
-   class="m-3 bg-blue-600 text-white hover:bg-blue-800 mb-4 inline-block font-medium duration-200 p-3 rounded-lg">
-   <i class="fa-solid fa-arrow-left"></i> Kembali
-</a>
+    <a href="{{ route('previlage.book.index', $school->slug) }}"
+        class="m-3 bg-blue-600 text-white hover:bg-blue-800 mb-4 inline-block font-medium duration-200 p-3 rounded-lg">
+        <i class="fa-solid fa-arrow-left"></i> Back
+    </a>
 
     <form class="mx-5 grid grid-cols-1 md:grid-cols-2 gap-6" action="{{ route('previlage.book.store', $school->slug) }}"
         method="post" enctype="multipart/form-data">

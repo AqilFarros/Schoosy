@@ -39,8 +39,9 @@ class BookController extends Controller
     public function create(string $slug)
     {
         $school = School::where('slug', $slug)->first();
+        $previlage = Previllage::where('school_id', $school->id)->where('user_id', Auth::id())->first();
 
-        return view('page.book.create', compact('school'));
+        return view('page.book.create', compact('school', 'previlage'));
     }
 
     public function store(Request $request, string $slug)

@@ -74,14 +74,8 @@
                             </div>
                             <ul class="py-2" aria-labelledby="user-menu-button">
                                 <li>
-                                    <a href="#" class="block px-4 py-2 text-sm">Dashboard</a>
-                                </li>
-                                <li>
                                     <a href="{{ route('user.show', Auth::id()) }}"
                                         class="block px-4 py-2 text-sm">Profile</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="block px-4 py-2 text-sm">Setting</a>
                                 </li>
                                 <li>
                                     <form action="{{ route('logout') }}" method="post">
@@ -125,7 +119,7 @@
                     class="w-full h-full object-cover object-center py-4 px-2 rounded-xl">
             </div>
             <div class="flex flex-col lg:items-end ml-2 py-4">
-                <h2 
+                <h2
                     class="font-Nunito font-bold text-white bg-main-color py-1 px-2 mb-2 w-fit rounded-md hover:shadow-md hover:-translate-y-1 duration-300 cursor-pointer">
                     {{ $school->name }}
                 </h2>
@@ -155,13 +149,16 @@
                         <p>{{ $school->code }}</p>
                     </div>
 
-                    <div
-                        class="bg-main-color w-[8em] rounded-lg hover:bg-yellow-400 duration-300 mt-12 ml-auto items-end">
-                        <a href="#">
-                            <p class="text-center py-1 font-Nunito font-semibold text-white hover:text-slate-100">Join
-                                School</p>
-                        </a>
-                    </div>
+                    <form action="{{ route('school.joinSchool', $school->code) }}" method="post">
+                        @csrf
+                        @method('POST')
+                        <button type="submit"
+                            class="bg-main-color w-[8em] rounded-lg hover:bg-yellow-400 duration-300 mt-12 ml-auto items-end">
+                            <p class="py-1 font-Nunito font-semibold text-white hover:text-slate-100">
+                                Join School
+                            </p>
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>

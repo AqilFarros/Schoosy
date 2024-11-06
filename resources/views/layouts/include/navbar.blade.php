@@ -14,7 +14,6 @@
                     </svg>
                 </button>
 
-
                 <div class="items-center hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
                     <ul
                         class="flex flex-col font-medium p-4 md:p-0 mt-4 border md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
@@ -104,6 +103,12 @@
                     <a href="{{ route('school.member', $school->slug) }}"
                         class="hover:text-main-color duration-300">Member</a>
                 </li>
+                @if ($previlage->role == 'owner' || $previlage->role == 'operator')
+                    <li>
+                        <a href="{{ route('previlage.absentEmployee.index', $school->slug) }}"
+                            class="hover:text-main-color duration-300">Absent</a>
+                    </li>
+                @endif
             </ul>
         </div>
 

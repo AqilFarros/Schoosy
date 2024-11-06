@@ -3,7 +3,7 @@
 @section('content')
     <a href="{{ route('previlage.book.index', $school->slug) }}"
         class="m-3 bg-blue-600 text-white hover:bg-blue-800 mb-4 inline-block font-medium duration-200 p-3 rounded-lg">
-        <i class="fa-solid fa-arrow-left"></i> Kembali
+        <i class="fa-solid fa-arrow-left"></i> Back
     </a>
 
     <form class="mx-5 grid grid-cols-1 md:grid-cols-2 gap-6"
@@ -28,14 +28,14 @@
             <label for="image" class="block mb-2 text-sm font-medium text-gray-900">Upload Image Cover Book</label>
             <input
                 class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 p-2"
-                name="image" id="image" type="file" required>
+                name="image" id="image" type="file">
         </div>
 
         <div>
             <label for="file" class="block mb-2 text-sm font-medium text-gray-900">File PDF Book</label>
             <input
                 class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 p-2"
-                type="file" name="file" required>
+                type="file" name="file">
         </div>
 
         <div class="col-span-1 md:col-span-2">

@@ -17,7 +17,7 @@
                     @foreach ($video as $item)
                         <tr>
                             <th scope="row">{{ $loop->iteration }}</th>
-                            <td>NAMA VIDEO</td>
+                            <td>{{ $item->name }}</td>
                             <td>{!! $item->getVideoAttributes($item->url_youtube) !!}</td>
                             <td>
                                 <form action="{{ route('admin.video.delete', $item->id) }}" method="post" class="d-inline">

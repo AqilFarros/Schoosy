@@ -1,14 +1,14 @@
 @extends('layouts.parent')
 
 @section('content')
-<form action="{{ route('previlage.classroom.store', $school->slug) }}" method="post" enctype="multipart/form-data">
+<form action="{{ route('previlage.classroom.update', [$school->slug, $classroom->slug]) }}" method="post" enctype="multipart/form-data">
     @csrf
-    @method('POST')
+    @method('PUT')
 
     <div class="mx-5 grid grid-cols-1 md:grid-cols-2 gap-6">
 
         <div>
-            <label for="">Name</label>
+            <label for="">Name Of Class</label>
             <input class="border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2" type="text"
                 name="name" value="{{ $classroom->name }}">
         </div>

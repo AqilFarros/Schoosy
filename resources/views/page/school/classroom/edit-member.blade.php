@@ -40,8 +40,16 @@
                     </div>
                     @foreach ($student as $item)
                         <div class="flex items-center mt-3 space-x-16">
-                            <img class="w-11 h-11 rounded-full"
-                                src="https://ui-avatars.com/api/?background=0D8ABC&color=fff" alt="Foto Profile">
+                            <div class="w-11 h-11">
+                                @if (empty($item->user->image))
+                                    <img class="w-full h-full rounded-full"
+                                        src="https://ui-avatars.com/api/?background=random&name={{ $item->name }}"
+                                        alt="Profile Image">
+                                @else
+                                    <img class="w-full h-full rounded-full object-center object-cover"
+                                        src="{{ url('storage/profile/', $item->user->image) }}" alt="Profile Image">
+                                @endif
+                            </div>
                             <p class="bg-green-100 text-green-800 text-lg font-medium px-3 py-1 rounded-lg ">
                                 {{ $item->name }}
                             </p>
@@ -65,8 +73,16 @@
                     </div>
                     @foreach ($classmate as $item)
                         <div class="flex items-center mt-3 space-x-16">
-                            <img class="w-11 h-11 rounded-full"
-                                src="https://ui-avatars.com/api/?background=0D8ABC&color=fff" alt="Foto Profile">
+                            <div class="w-11 h-11">
+                                @if (empty($item->user->image))
+                                    <img class="w-full h-full rounded-full"
+                                        src="https://ui-avatars.com/api/?background=random&name={{ $item->name }}"
+                                        alt="Profile Image">
+                                @else
+                                    <img class="w-full h-full rounded-full object-center object-cover"
+                                        src="{{ url('storage/profile/', $item->user->image) }}" alt="Profile Image">
+                                @endif
+                            </div>
                             <p class="bg-green-100 text-green-800 text-lg font-medium px-3 py-1 rounded-lg ">
                                 {{ $item->name }}
                             </p>

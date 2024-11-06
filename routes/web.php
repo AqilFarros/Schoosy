@@ -53,7 +53,7 @@ Route::prefix('school')->name('school.')->middleware('auth')->group(function () 
     Route::get('/', [SchoolController::class, 'index'])->middleware('admin')->name('index');
 });
 
-Route::prefix('{slug}')->name('previlage.')->group(function () {
+Route::prefix('{slug}')->name('previlage.')->middleware('auth')->group(function () {
     Route::get('/search', [PrevillageController::class, 'searchPrevillage'])->middleware('previllage')->name('searchPrevillage');
     Route::put('/update/{prvId}', [PrevillageController::class, 'updatePrevillage'])->middleware('operator')->name('updatePrevillage');
     Route::delete('/delete/{prvId}', [PrevillageController::class, 'deletePrevillage'])->middleware('operator')->name('deletePrevillage');

@@ -280,8 +280,8 @@
                 <div class="developer__card bg-main-color p-10 pt-24 rounded-md relative">
                     <img src="{{ asset('landing-page/asset/developer1.png') }}" alt="popular_image"
                         class="w-56 absolute rounded-full -top-5 left-1/2 transform -translate-x-1/2 -translate-y-1/2 duration-500">
-                    <p class="italic">Project Manager</p>
-                    <h3>Robert Thomas</h3>
+                    <p class="italic">Backend Developer</p>
+                    <h3>Aqil Farros Al Ghonim</h3>
 
                     <div class="flex items-center gap-5 text-2xl pt-10">
                         <i class="ri-facebook-fill to-slate-300 hover:text-yellow-400 duration-300 cursor-pointer"></i>
@@ -299,7 +299,7 @@
                     <img src="{{ asset('landing-page/asset/developer2.png') }}" alt="popular_image"
                         class="w-56 absolute rounded-full -top-5 left-1/2 transform -translate-x-1/2 -translate-y-1/2 duration-500">
                     <p class="italic">Frontend Developer</p>
-                    <h3>Michael Brown</h3>
+                    <h3>Daud Tsaqiif Rahmadsyah</h3>
 
                     <div class="flex items-center gap-5 text-2xl pt-10">
                         <i class="ri-facebook-fill to-slate-300 hover:text-yellow-400 duration-300 cursor-pointer"></i>
@@ -316,26 +316,8 @@
                 <div class="developer__card bg-main-color p-10 pt-24 rounded-md relative">
                     <img src="{{ asset('landing-page/asset/developer3.png') }}" alt="popular_image"
                         class="w-56 absolute rounded-full -top-5 left-1/2 transform -translate-x-1/2 -translate-y-1/2 duration-500">
-                    <p class="italic">Backend Developer</p>
-                    <h3>James Taylor</h3>
-
-                    <div class="flex items-center gap-5 text-2xl pt-10">
-                        <i class="ri-facebook-fill to-slate-300 hover:text-yellow-400 duration-300 cursor-pointer"></i>
-                        <i
-                            class="ri-twitter-x-line to-slate-300 hover:text-yellow-400 duration-300 cursor-pointer text-base"></i>
-                        <i
-                            class="ri-instagram-line to-slate-300 hover:text-yellow-400 duration-300 cursor-pointer"></i>
-                        <i class="ri-linkedin-fill to-slate-300 hover:text-yellow-400 duration-300 cursor-pointer"></i>
-                    </div>
-
-                </div>
-
-                <!-- card 4 -->
-                <div class="developer__card bg-main-color p-10 pt-24 rounded-md relative">
-                    <img src="{{ asset('landing-page/asset/developer4.png') }}" alt="popular_image"
-                        class="w-56 absolute rounded-full -top-5 left-1/2 transform -translate-x-1/2 -translate-y-1/2 duration-500">
-                    <p class="italic">Database Manager</p>
-                    <h3>David Wilson</h3>
+                    <p class="italic">Frontend Developer</p>
+                    <h3>Muhammad Jahran</h3>
 
                     <div class="flex items-center gap-5 text-2xl pt-10">
                         <i class="ri-facebook-fill to-slate-300 hover:text-yellow-400 duration-300 cursor-pointer"></i>
