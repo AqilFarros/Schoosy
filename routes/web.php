@@ -8,6 +8,7 @@ use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\PrevillageController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -37,6 +38,11 @@ Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
     Route::delete('/delete-book/{id}', [AdminController::class, 'deleteBook'])->name('book.delete');
     Route::delete('/delete-video/{id}', [AdminController::class, 'deleteVideo'])->name('video.delete');
     Route::delete('/delete-user/{id}', [AdminController::class, 'deleteUser'])->name('user.delete');
+    // storage-link
+    Route::get('/storage-link', function () {
+        Artisan::call('storage:link');
+        return 'success';
+    });
 });
 
 Route::prefix('school')->name('school.')->middleware('auth')->group(function () {
