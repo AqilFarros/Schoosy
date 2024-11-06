@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class VideoBook extends Model
 {
     protected $fillable = [
+        'name',
         'book_id',
         'url_youtube'
     ];

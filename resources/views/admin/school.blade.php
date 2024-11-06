@@ -8,7 +8,7 @@
                 <thead>
                     <tr>
                         <th scope="col">No</th>
-                        <th scope="col" >Name of School</th>
+                        <th scope="col">Name of School</th>
                         <th scope="col">Email</th>
                         <th scope="col">Address</th>
                         <th scope="col">Phone</th>
@@ -21,21 +21,25 @@
                 <tbody>
                     @foreach ($school as $item)
                         <tr>
-                            <th scope="row">{{$loop->iteration}}</th>
+                            <th scope="row">{{ $loop->iteration }}</th>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->email }}</td>
                             <td>{{ $item->address }}</td>
                             <td>{{ $item->phone }}</td>
                             <td>{{ $item->website }}</td>
                             <td>{{ $item->code }}</td>
-                            <td><img src="{{ url('storage/school/', $item->image) }}" alt=""  class="img-thumbnail" width="250"></td>
-                            <td><form action="#" method="post" class="d-inline">
+                            <td><img src="{{ url('storage/school/', $item->image) }}" alt="" class="img-thumbnail"
+                                    width="250"></td>
+                            <td>
+                                <form action="{{ route('admin.school.delete', $item->id) }}" method="post"
+                                    class="d-inline">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger" type="submit">
                                         <i class="bi bi-trash"></i>
                                     </button>
-                                </form></td>
+                                </form>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

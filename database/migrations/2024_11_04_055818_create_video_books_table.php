@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('video_books', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Book::class)->references('id')->on('books')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('name');
             $table->string('url_youtube');
             $table->timestamps();
         });

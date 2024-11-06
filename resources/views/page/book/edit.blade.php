@@ -1,12 +1,14 @@
 @extends('layouts.parent')
 
 @section('content')
-<a href="{{ route('previlage.book.index', $school->slug) }}"
-   class="m-3 bg-blue-600 text-white hover:bg-blue-800 mb-4 inline-block font-medium duration-200 p-3 rounded-lg">
-   <i class="fa-solid fa-arrow-left"></i> Kembali
-</a>
+    <a href="{{ route('previlage.book.index', $school->slug) }}"
+        class="m-3 bg-blue-600 text-white hover:bg-blue-800 mb-4 inline-block font-medium duration-200 p-3 rounded-lg">
+        <i class="fa-solid fa-arrow-left"></i> Kembali
+    </a>
 
-    <form class="mx-5 grid grid-cols-1 md:grid-cols-2 gap-6" action="{{ route('previlage.book.update', [$school->slug, $book->slug]) }}" method="post" enctype="multipart/form-data">
+    <form class="mx-5 grid grid-cols-1 md:grid-cols-2 gap-6"
+        action="{{ route('previlage.book.update', [$school->slug, $book->slug]) }}" method="post"
+        enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div>
@@ -18,7 +20,7 @@
                 </span>
                 <input type="text" id="name" name="name"
                     class="rounded-none rounded-r-lg bg-gray-50 border border-gray-300 block w-full text-sm p-2 text-gray-900"
-                    placeholder="Book Name" required>
+                    placeholder="Book Name" value="{{ $book->name }}" required>
             </div>
         </div>
 

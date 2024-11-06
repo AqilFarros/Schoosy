@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AbsentEmployee;
+use App\Models\AbsentEmployeeData;
 use App\Models\AbsentEmployeeNote;
 use App\Models\Previllage;
 use App\Models\School;
@@ -15,10 +16,11 @@ class AbsentEmployeeController extends Controller
     public function index(string $slug)
     {
         $school = School::where('slug', $slug)->first();
-        $absentEmployee = AbsentEmployee::where('school_id', $school->id)->latest()->get();
+        $absent = AbsentEmployee::where('school_id', $school->id)->latest()->get();
+        $teacher = Previllage::where('role', '!=', 'student')->where('school_id', $school->id)->get();
         $previlage = Previllage::where('school_id', $school->id)->where('user_id', Auth::id())->first();
 
-        return view('page.school.absent-employee.index', compact('absentEmployee', 'school', 'previlage'));
+        return view('page.school.absent-employee.index', compact('absent', 'school', 'previlage', 'teacher'));
     }
 
     public function makeAbsent(Request $request, string $slug)
@@ -55,20 +57,22 @@ class AbsentEmployeeController extends Controller
         $school = School::where('slug', $slug)->first();
         $absent = AbsentEmployee::findOrFail($id);
         $previlage = Previllage::where('school_id', $school->id)->where('user_id', Auth::id())->first();
+        $teacher = Previllage::where('role', '!=', 'student')->where('school_id', $school->id)->get();
 
-        return view('page.school.absent-employee.edit', compact('school', 'absent', 'previlage'));
+        return view('page.school.absent-employee.edit', compact('school', 'absent', 'previlage', 'teacher'));
     }
 
     public function updateStatus(Request $request, string $slug, string $id)
     {
         $request->validate([
+            'status' => 'required',
             'employee' => 'required',
         ]);
-
+        
         $employees = $request->input('employee');
 
         foreach ($employees as $key => $employee) {
-            AbsentEmployee::create([
+            AbsentEmployeeData::create([
                 'absent_employee_id' => $id,
                 'previllage_id' => $employee,
                 'status' => $request->status[$key]

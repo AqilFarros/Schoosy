@@ -26,7 +26,7 @@
                                     alt="user photo">
                             </td>
                             <td>
-                                <form action="#" method="post" class="d-inline">
+                                <form action="{{ route('admin.user.delete', $item->id) }}" method="post" class="d-inline">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger" type="submit">

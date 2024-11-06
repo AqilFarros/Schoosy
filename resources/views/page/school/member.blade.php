@@ -46,39 +46,49 @@
                                         src="{{ url('storage/profile/', $item->user->image) }}" alt="Profile Image">
                                 @endif
                             </div>
+                            <p>{{ $item->name }}</p>
                         </td>
                         <td>
                             @if ($item->role == 'owner')
                                 <p>{{ $item->role }}</p>
                             @else
                                 @if ($previlage->role == 'owner' || $previlage->role == 'operator')
-                                    <form action="{{ route('previlage.updatePrevillage', [$school->slug, $item->id]) }}"
-                                        method="post" class="flex flex-row gap-4">
-                                        @csrf
-                                        @method('PUT')
-                                        <select name="role" id="">
-                                            @if ($item->role == 'student')
-                                                <option value="student" selected>student</option>
-                                            @else
-                                                <option value="student">student</option>
-                                            @endif
+                                    <div class="flex gap-3 items-center">
+                                        <form action="{{ route('previlage.updatePrevillage', [$school->slug, $item->id]) }}"
+                                            method="post" class="flex flex-row gap-4">
+                                            @csrf
+                                            @method('PUT')
+                                            <select name="role" id="">
+                                                @if ($item->role == 'student')
+                                                    <option value="student" selected>student</option>
+                                                @else
+                                                    <option value="student">student</option>
+                                                @endif
 
-                                            @if ($item->role == 'teacher')
-                                                <option value="teacher" selected>teacher</option>
-                                            @else
-                                                <option value="teacher">teacher</option>
-                                            @endif
+                                                @if ($item->role == 'teacher')
+                                                    <option value="teacher" selected>teacher</option>
+                                                @else
+                                                    <option value="teacher">teacher</option>
+                                                @endif
 
-                                            @if ($item->role == 'operator')
-                                                <option value="operator" selected>operator</option>
-                                            @else
-                                                <option value="operator">operator</option>
-                                            @endif
-                                        </select>
+                                                @if ($item->role == 'operator')
+                                                    <option value="operator" selected>operator</option>
+                                                @else
+                                                    <option value="operator">operator</option>
+                                                @endif
+                                            </select>
 
-                                        <button type="submit"
-                                            class="bg-yellow-400 text-white hover:bg-white hover:text-yellow-400 px-3 py-1 rounded-lg duration-300">update</button>
-                                    </form>
+                                            <button type="submit"
+                                                class="bg-yellow-400 text-white hover:bg-white hover:text-yellow-400 px-3 py-1 rounded-lg duration-300">update</button>
+                                        </form>
+                                        <form action="{{ route('previlage.deletePrevillage', [$school->slug, $item->id]) }}"
+                                            method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                class="bg-red-500 text-white hover:bg-white hover:text-red-500 px-3 py-1 rounded-lg duration-300">Delete Member</button>
+                                        </form>
+                                    </div>
                                 @else
                                     <p>{{ $item->role }}</p>
                                 @endif

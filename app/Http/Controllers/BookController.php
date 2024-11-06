@@ -74,8 +74,9 @@ class BookController extends Controller
     {
         $school = School::where('slug', $slug)->first();
         $book = Book::where('slug', $bookSlug)->first();
+        $previlage = Previllage::where('school_id', $school->id)->where('user_id', Auth::id())->first();
 
-        return view('page.book.edit', compact('book', 'school'));
+        return view('page.book.edit', compact('book', 'school', 'previlage'));
     }
 
     public function update(Request $request, string $slug, string $bookSlug)
@@ -143,6 +144,7 @@ class BookController extends Controller
 
         VideoBook::create([
             'book_id' => $book->id,
+            'name' => $request->name,
             'url_youtube' => $request->url_youtube,
         ]);
 
@@ -158,6 +160,6 @@ class BookController extends Controller
 
         $video->delete();
 
-        return redirect()->route('previlage.book.index', $slug)->with('success', 'Success Delete Video Book');
+        return redirect()->route('previlage.book.show', [$slug, $bookSlug])->with('success', 'Success Delete Video Book');
     }
 }

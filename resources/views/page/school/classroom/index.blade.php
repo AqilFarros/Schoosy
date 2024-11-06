@@ -29,7 +29,7 @@
                 </div>
             </div>
         @empty
-            <p>No Class</p>
+            <p class="text-center font-Nunito font-black text-3xl">No Classroom Have Been Added Yet.</p>
         @endforelse
     </div>
 @endsection

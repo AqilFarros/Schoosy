@@ -70,6 +70,9 @@ Route::prefix('{slug}')->name('previlage.')->group(function () {
 
     Route::get('/absent-employee', [AbsentEmployeeController::class, 'index'])->middleware('operator')->name('absentEmployee.index');
     Route::post('/absent-employee/make-absent', [AbsentEmployeeController::class, 'makeAbsent'])->middleware('operator')->name('absentEmployee.makeAbsent');
+    Route::get('/absent-employee/{id}', [AbsentEmployeeController::class, 'detailAbsent'])->middleware('operator')->name('absentEmployee.detail');
+    Route::get('/absent-employee/edit/{id}', [AbsentEmployeeController::class, 'editStatus'])->middleware('operator')->name('absentEmployee.edit');
+    Route::post('/absent-employee/update/{id}', [AbsentEmployeeController::class, 'updateStatus'])->middleware('operator')->name('absentEmployee.update');
 
     Route::get('/classroom', [ClassroomController::class, 'index'])->middleware('previllage')->name('classroom.index');
     Route::get('/{slugClassroom}', [ClassroomController::class, 'show'])->middleware('previllage')->name('classroom.show');
@@ -84,7 +87,7 @@ Route::prefix('{slug}')->name('previlage.')->group(function () {
     Route::put('/{slugClassroom}/add-homeroom', [ClassroomController::class, 'addHomeroom'])->middleware('operator')->name('classroom.addHomeroom');
     Route::put('/{slugClassroom}/remove-homeroom', [ClassroomController::class, 'removeHomeroom'])->middleware('operator')->name('classroom.removeHomeroom');
     Route::get('/{slugClassroom}/absent/{id}', [AbsentClassController::class, 'show'])->middleware('homeroom')->name('classroom.absent');
-    Route::get('/{slugClassroom}/detail-absent/{id}', [AbsentClassController::class, 'detailAbsent'])->middleware('homeroom')->name('classroom.detailAbsent');
+    Route::get('/{slugClassroom}/detail-absent/{id}', [AbsentClassController::class, 'detailAbsent'])->middleware('previllage')->name('classroom.detailAbsent');
     Route::post('/{slugClassroom}/make-absent', [AbsentClassController::class, 'store'])->middleware('homeroom')->name('classroom.makeAbsent');
     Route::post('/{slugClassroom}/update-absent/{id}', [AbsentClassController::class, 'updateStatus'])->middleware('homeroom')->name('classroom.updateAbsent');
 });

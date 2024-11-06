@@ -20,7 +20,7 @@
                             <td>NAMA VIDEO</td>
                             <td>{!! $item->getVideoAttributes($item->url_youtube) !!}</td>
                             <td>
-                                <form action="#" method="post" class="d-inline">
+                                <form action="{{ route('admin.video.delete', $item->id) }}" method="post" class="d-inline">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger" type="submit">

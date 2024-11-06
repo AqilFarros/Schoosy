@@ -48,7 +48,7 @@
                     </div>
                 </div>
             @empty
-                <p class="text-center font-Nunito font-black text-3xl">belum ada buku</p>
+                <p class="text-center font-Nunito font-black text-3xl">No Books Have Been Added Yet.</p>
             @endforelse
         </div>
     </div>

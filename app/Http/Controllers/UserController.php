@@ -80,8 +80,13 @@ class UserController extends Controller
         } else {
             $request->validate([
                 'name' => 'required|string|max:255',
-                'email' => 'required|string|email|max:255|unique:users',
-            ]);  
+                'email' => 'required|string|email|max:255',
+            ]);
+
+            $previlages = Previllage::where('user_id', $id)->get();
+            foreach ($previlages as $previlage) {
+                $previlage->update(['name' => $request->name]);
+            }
 
             $user->update($request->all());
         }
@@ -92,8 +97,5 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
-        
-    }
+    public function destroy(string $id) {}
 }

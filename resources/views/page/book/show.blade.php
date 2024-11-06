@@ -41,27 +41,29 @@
     @endif
 
     @forelse ($videoBook as $item)
-        <div class="flex ">
+        <div class="flex">
             <div class="max-w-md mx-auto bg-white shadow-md rounded-lg p-4 border border-gray-200">
 
                 <div class="mb-4">
                     {!! $item->getVideoAttributes($item->url_youtube) !!}
                 </div>
 
-                <p class="text-lg font-semibold text-gray-800 mb-2">{{$item->name}}</p>
+                <p class="text-lg font-semibold text-gray-800 mb-2">{{ $item->name }}</p>
 
-                <form action="{{ route('previlage.book.deleteVideo', [$school->slug, $book->slug, $item->id]) }}"
-                    method="post" class="flex justify-end">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="text-red-600 hover:text-red-800 transition duration-200">
-                        <i class="fa-solid fa-trash"></i>
-                    </button>
-                </form>
+                @if ($previlage->role == 'owner' || $previlage->role == 'operator')
+                    <form action="{{ route('previlage.book.deleteVideo', [$school->slug, $book->slug, $item->id]) }}"
+                        method="post" class="flex justify-end">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="text-red-600 hover:text-red-800 transition duration-200">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </form>
+                @endif
             </div>
         </div>
 
     @empty
-        <p>No Video</p>
+        <p class="text-center font-Nunito font-black text-3xl">No Video Have Been Added Yet.</p>
     @endforelse
 @endsection

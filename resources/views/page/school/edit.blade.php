@@ -12,7 +12,7 @@
 
         <div>
             <label for="">Description</label>
-            <textarea class=" border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2" type="text" name="description" value="{{ $school->description }}"></textarea>
+            <textarea class=" border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2" type="text" name="description" value="{{ $school->description }}">{{ $school->description }}</textarea>
         </div>
 
         <div>

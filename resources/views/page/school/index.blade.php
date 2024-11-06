@@ -4,14 +4,26 @@
     <div class="flex flex-col md:flex-row justify-center m-10">
 
         <div class="max-w-[500px] w-[100%] bg-white border border-gray-200 rounded-lg shadow mb-5 md:mb-0 overflow-hidden">
-            <div class="bg-main-color">
+            <div class="relative bg-main-color">
                 <div class="flex items-center justify-center py-2 w-[13em] h-[14em] lg:w-[16rem] lg:h-[16rem] mx-auto">
                     <img class="w-full h-full object-cover object-center rounded-full"
                         src="{{ url('storage/school/', $school->image) }}" alt="school" />
-                    <div class="relative w-14 h-10 top-20 -left-5 lg:top-20 lg:left-20 rounded-full">
-                        <i
-                            class="fa-solid fa-pencil bg-gray-300 p-2 rounded-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 "></i>
-                    </div>
+                    @if ($previlage->role == 'owner' || $previlage->role == 'operator')
+                        <form action="{{ route('school.update', $school->slug) }}" method="post" enctype="multipart/form-data"
+                            id="uploadForm">
+                            @csrf
+                            @method('PUT')
+                            <label for="image">
+                                <div class="absolute w-14 h-10 right-2 bottom-2 rounded-full cursor-pointer">
+                                    <div class="relative">
+                                        <i
+                                            class="fa-solid fa-pencil bg-gray-300 p-2 rounded-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 "></i>
+                                    </div>
+                                </div>
+                            </label>
+                            <input type="file" name="image" id="image" hidden onchange="uploadImage()" />
+                        </form>
+                    @endif
                 </div>
             </div>
             <div class="px-5 py-2">
@@ -55,22 +67,30 @@
                     <p>{{ $school->description }}</p>
                 </div>
 
-                @if ($previlage->role == 'owner' || $previlage->role == 'operator')
-                    <div class="flex justify-end gap-x-2">
+                <div class="flex justify-end gap-x-2">
+                    @if ($previlage->role == 'owner' || $previlage->role == 'operator')
                         <a href="{{ route('school.edit', $school->slug) }}"
                             class="inline-flex items-center px-3 text-sm font-medium text-center bg-yellow-400 rounded-xl text-white py-2 hover:bg-opacity-70 duration-300">
                             Edit
                         </a>
-                        @if ($previlage->role == 'owner')
-                            <form action="{{ route('school.destroy', $school->slug) }}" method="post">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit"
-                                    class="inline-flex items-center px-3 text-sm font-medium text-center bg-red-500 rounded-xl text-white py-2 hover:bg-opacity-70 duration-300">Delete</button>
-                            </form>
-                        @endif
-                    </div>
-                @endif
+                    @endif
+                    <form action="{{ route('previlage.deletePrevillage', [$school->slug, $previlage->id]) }}"
+                        method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit"
+                            class="inline-flex items-center px-3 text-sm font-medium text-center bg-red-500 rounded-xl text-white py-2 hover:bg-opacity-70 duration-300">Leave
+                            School</button>
+                    </form>
+                    @if ($previlage->role == 'owner')
+                        <form action="{{ route('school.destroy', $school->slug) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit"
+                                class="inline-flex items-center px-3 text-sm font-medium text-center bg-red-500 rounded-xl text-white py-2 hover:bg-opacity-70 duration-300">Delete</button>
+                        </form>
+                    @endif
+                </div>
             </div>
         </div>
 
@@ -113,6 +133,12 @@
             </a>
         </div>
     </div>
+
+    <script>
+        function uploadImage() {
+            document.getElementById('uploadForm').submit();
+        }
+    </script>
 @endsection
 
 {{-- <div>

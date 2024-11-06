@@ -74,8 +74,9 @@ class SchoolController extends Controller
     {
         $data = School::where('slug', $slug)->first();
         $school = School::findOrFail($data->id);
+        $previlage = Previllage::where('school_id', $school->id)->where('user_id', Auth::id())->first();
 
-        return view('page.school.edit', compact('school'));
+        return view('page.school.edit', compact('school', 'previlage'));
     }
 
     /**
